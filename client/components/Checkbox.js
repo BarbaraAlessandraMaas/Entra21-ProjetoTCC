@@ -31,8 +31,9 @@ const styles = StyleSheet.create({
         alignItems: "center",        
     },
     message: {
+        fontFamily: 'Antic-Slab',
         paddingLeft: 10,
-        fontSize: 14,
+        fontSize: 15,
         color: "white"
     }
 });
