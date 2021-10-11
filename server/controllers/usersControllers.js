@@ -20,7 +20,7 @@ function getUserById(req, res, next) {
 
 // Criar um usuário
 function createUser(req, res, next) {
-    const { id, name, email } = req.body;
+    const { id, name, email, cpf, telefone, password } = req.body;
 
     //Verificando se o e-mail já está cadastrado
     const userAlreadyExists = users.find(user => user.email === email);
@@ -29,7 +29,7 @@ function createUser(req, res, next) {
         return res.status(409).json({ message: "User already exists" })
     }
 
-    const user = {id, name, email };
+    const user = {id, name, email, cpf, telefone, password };
 
     //Inserindo o usuário
     users.push(user);
