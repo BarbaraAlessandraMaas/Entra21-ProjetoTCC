@@ -1,4 +1,4 @@
-const users = require("../models/users");
+const users = require("../db/models/users");
 
 // Obter todos os usuários
 function getAllUsers(req, res, next) {

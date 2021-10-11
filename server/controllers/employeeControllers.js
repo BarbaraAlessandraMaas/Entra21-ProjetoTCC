@@ -1,4 +1,4 @@
-const employees = require("../models/employees");
+const employees = require("../db/models/employees");
 
 // Obter todos os usuários
 function getAllEmployees(req, res, next) {
