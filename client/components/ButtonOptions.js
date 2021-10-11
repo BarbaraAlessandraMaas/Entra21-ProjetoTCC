@@ -6,7 +6,7 @@ export function ButtonOptions() {
     return (
     <TouchableOpacity style={styles.options}>
         <View>
-            <FontAwesome name="bars" size={30} color={'white'}/>
+            <FontAwesome name="bars" size={25} color={'white'}/>
         </View>
     </TouchableOpacity>
     )
@@ -14,7 +14,7 @@ export function ButtonOptions() {
 
 const styles = StyleSheet.create({
     options:{
-        marginLeft: 25,
-        marginTop: 10
+        marginLeft: 3,
+        marginRight: 10
     }
 });
