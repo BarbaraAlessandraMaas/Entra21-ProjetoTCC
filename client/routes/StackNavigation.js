@@ -1,21 +1,16 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet } from 'react-native';
-import  TelaInicio from './screens/TelaInicio';
-import  MeusPlanos from './screens/MeusPlanos';
-import  Notificações from './screens/Notificações';
-import  MinhaConta from './screens/MinhaConta';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { ButtonOptions } from './components/ButtonOptions';
-
+import React from "react";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import  { TelaInicio } from '../screens/TelaInicio';
+import  { MeusPlanos }  from '../screens/MeusPlanos';
+import  { Notificacoes } from '../screens/Notificacoes';
+import  { MinhaConta } from '../screens/MinhaConta';
+import  { ButtonOptions } from '../components/ButtonOptions';
 
 const Stack = createNativeStackNavigator();
 
-export default function App() {
+export function StackNavigation() {    
   return (
-    <NavigationContainer>
-    <Stack.Navigator initialRouteName='Tela Inicio'>
+    <Stack.Navigator initialRouteName='TelaInicio'>
       <Stack.Screen name="TelaInicio" component={TelaInicio} options={{          
              title: 'Tela inicial',
              headerTitleStyle: {
@@ -29,7 +24,7 @@ export default function App() {
              ),
            }}
          />
-         <Stack.Screen name="Notificações" component={Notificações} options={{          
+         <Stack.Screen name="Notificações" component={Notificacoes} options={{          
              title: 'Tela inicial',
              headerTitleStyle: {
                color:'white',
@@ -69,15 +64,5 @@ export default function App() {
            }}
          />
     </Stack.Navigator>
-  </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-})

@@ -1,7 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View, StatusBar, FlatList, TouchableOpacity, Button } from 'react-native';
-import { BottomNavigation, Text } from 'react-native-paper';
+import { StyleSheet, Text, View, StatusBar, FlatList, TouchableOpacity,  } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
+import { Options } from '../components/Drawer';
+import { ButtonOptions } from '../components/ButtonOptions';
 
 const user = {
     name: 'Rogerinho'
@@ -16,19 +17,6 @@ const planos = [
     { id: 7, title: '500 Megas' , valor: 'R$ 119,00' }
 ]
 
-function AllPlans({ navigation }) {
-    return (
-      <View style={styles.containerAllPlans }>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('telaPlanos')}
-          style={styles.link}
-        >
-        <Text style={styles.linkText}>Veja todos os planos</Text>
-        <Text style={styles.linkText}>disponíveis aqui</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  }
 
 const mostrarPlanos = ({ item }) => {
     return (
@@ -42,15 +30,16 @@ const mostrarPlanos = ({ item }) => {
     </View>
     );
 }
-
-
-export default function TelaInicio() { 
+export function TelaInicio({ navigation }) { 
     return (
         <View>
+            <View style={styles.cabecalho}>
                 <StatusBar
                     animated={true}
                     backgroundColor='#183557'
                 />
+                <ButtonOptions/>
+            </View>
             <View style={styles.containerDestaques}>
                 <Text style={styles.titulo}>Confira os destaques</Text>
                 <FlatList
@@ -61,7 +50,16 @@ export default function TelaInicio() {
                 style={styles.lista}
                 />
             </View>
-            <AllPlans></AllPlans>
+            <View style={styles.containerAllPlans }>
+                <TouchableOpacity
+                onPress={() => {
+                    navigation.navigate("Planos")
+                }}
+                style={styles.link}
+                > 
+                <Text style={styles.botaoText}>Veja os planos disponíveis aqui</Text>
+            </TouchableOpacity>
+            </View>
         </View>
     );
 }
@@ -126,18 +124,16 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         textAlign: 'center',
     },
-    butaotext:{
+    botaoText:{
         fontSize: 15,
     },
     containerAllPlans:{
         textAlign: 'center',
-        flex: 1,
         justifyContent: "center",
         alignItems: 'center',
+        height: 200
     },
-    link: {
-
-    },
+  
     linkText:{
         textAlign:'center',
         fontSize: 17
