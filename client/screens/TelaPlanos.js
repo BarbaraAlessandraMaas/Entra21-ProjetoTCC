@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { ScrollView, View, Text, TouchableOpacity, StyleSheet, Modal, Image, LayoutAnimation, Platform, UIManager } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import { ScrollView, View, Text, TouchableOpacity, StyleSheet, Modal, Image, LayoutAnimation, Platform, UIManager, StatusBar } from "react-native";
 import { useFonts } from 'expo-font';
 import { ArrowBack } from "../components/ArrowBack";
 import { ExpandableList } from "../components/ExpandableList";
@@ -7,30 +7,57 @@ import { ExpandableList } from "../components/ExpandableList";
 const CONTENT = [
     {
         isExpanded: false,
-        categoryName: "100 MEGA",
+        ds_velocidade: "100 MEGA",
         subcategory: [
-            { id: 1, val: "Descrição" }
+            {
+                id: 1,
+                vl_plano: "R$ 80,00",
+                ds_plano: "Download até 100 MEGA, Wi-fi"
+            }
         ]
     },
     {
         isExpanded: false,
-        categoryName: "250 MEGA",
+        ds_velocidade: "200 MEGA",
         subcategory: [
-            { id: 2, val: "Descrição" }
+            {
+                id: 2,
+                vl_plano: "R$ 100,00",
+                ds_plano: "Download até 200 MEGA, Wi-fi"
+            }
         ]
     },
     {
         isExpanded: false,
-        categoryName: "500 MEGA",
+        ds_velocidade: "250 MEGA",
         subcategory: [
-            { id: 3, val: "Descrição" }
+            {
+                id: 3,
+                vl_plano: "R$ 130,00",
+                ds_plano: "Download até 250 MEGA, Wi-fi"
+            }
         ]
     },
     {
         isExpanded: false,
-        categoryName: "1000 MEGA",
+        ds_velocidade: "500 MEGA",
         subcategory: [
-            { id: 4, val: "Descrição" }
+            {
+                id: 4,
+                vl_plano: "R$ 160,00",
+                ds_plano: "Download até 500 MEGA, Wi-fi"
+            }
+        ]
+    },
+    {
+        isExpanded: false,
+        ds_velocidade: "1000 MEGA",
+        subcategory: [
+            {
+                id: 5,
+                vl_plano: "R$ 250,00",
+                ds_plano: "Download até 1000 MEGA, Wi-fi"
+            }
         ]
     }
 ]
@@ -38,6 +65,8 @@ const CONTENT = [
 export function TelaPlanos() {
     const [modalOpen, setModalOpen] = useState(false);
     const [listDataSource, setListDataSource] = useState(CONTENT);
+    const [planoSelecionado, setPlanoSelecionado] = useState(null);
+    const scrollRef = useRef(null);
 
     if (Platform.OS === "android") {
         UIManager.setLayoutAnimationEnabledExperimental(true);
@@ -51,23 +80,31 @@ export function TelaPlanos() {
 
         array.map((value, placeindex) =>
             placeindex === index
-            ? (array[placeindex]["isExpanded"]) = !array[placeindex]["isExpanded"]
-            : (array[placeindex]["isExpanded"]) = false
+                ? (array[placeindex]["isExpanded"]) = !array[placeindex]["isExpanded"]
+                : (array[placeindex]["isExpanded"]) = false
         );
 
-        setListDataSource(array);
+        setListDataSource(array);        
+        setPlanoSelecionado(index);
     }
 
-    useFonts({ 'Roboto': require('../assets/Roboto-Regular.ttf') });
+    useFonts({ 'Roboto': require('../assets/Roboto-Regular.ttf') });    
+
+
+    useEffect(() => {
+        if (planoSelecionado >= 3) {
+            scrollRef.current.scrollToEnd();
+        }
+    }, [listDataSource, planoSelecionado]);
 
     return (
         <View style={styles.container}>
             <ArrowBack text="PLANOS" />
-            <ScrollView style={styles.list}>
+            <ScrollView style={styles.list} ref={scrollRef}>
                 {
                     listDataSource.map((item, key) => (
                         <ExpandableList
-                            key={item.categoryName}
+                            key={item.ds_velocidade}
                             item={item}
                             onClickFunction={() => {
                                 updateLayout(key);
@@ -76,14 +113,21 @@ export function TelaPlanos() {
                     ))
                 }
             </ScrollView>
-            <TouchableOpacity style={styles.buttons} onPress={() => setModalOpen(true)}>
-                <Text style={styles.buttonText}>Adquira</Text>
-            </TouchableOpacity>
+
+            <View style={styles.footer}>
+                <TouchableOpacity style={styles.buttons} onPress={() => setModalOpen(true)}>
+                    <Text style={styles.buttonText}>Adquira</Text>
+                </TouchableOpacity>
+            </View>
+
+
             <Modal visible={modalOpen} animationType="slide">
                 <View style={styles.modalContent}>
                     <Image source={require("../assets/logo.png")} style={styles.image} />
-                    <Text style={styles.modalText}>Estes são todos os planos disponíveis na sua região.</Text>
-                    <Text style={styles.modalText}>Para adquirir novos planos, visite a empresa Exus mais próxima de você!</Text>
+                    <Text style={styles.modalText}>
+                        Estes são todos os planos disponíveis na sua região. {"\n\n"}
+                        Para adquirir um plano, visite a empresa Exus mais próxima de você!
+                    </Text>
                     <TouchableOpacity style={styles.buttons} onPress={() => setModalOpen(false)}><Text style={styles.buttonText}>Continuar</Text></TouchableOpacity>
                 </View>
             </Modal>
@@ -96,6 +140,8 @@ const styles = StyleSheet.create({
         flex: 1
     },
     list: {
+        flex: 1,
+        top: 0,
         marginHorizontal: 30
     },
     headerButton: {
@@ -103,18 +149,23 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         fontSize: 18
     },
+    footer: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
+    },
     buttons: {
-        margin: 20,
-        width: 120,
-        paddingVertical: 10,
-        backgroundColor: "#36B8B8",
+        width: 140,
+        paddingVertical: 12,
+        paddingHorizontal: 30,
+        backgroundColor: "#EAEAEA",
         textAlign: "center",
-        alignSelf: "center",
-        marginTop: 80
+        borderRadius: 5,
+        marginVertical: 50
     },
     buttonText: {
         fontFamily: "Roboto",
-        color: "white",
+        color: "#3A3A3A",
         fontSize: 18,
         textAlign: "center"
     },
@@ -132,6 +183,7 @@ const styles = StyleSheet.create({
     modalText: {
         textAlign: "center",
         fontSize: 18,
-        marginTop: 30
+        marginTop: 30,
+        paddingBottom: 50
     }
 });

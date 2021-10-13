@@ -18,7 +18,7 @@ export function ArrowBack(props) {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 0.2
     },
     status: {
         backgroundColor: "#183557",
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
         borderBottomRightRadius: 20, 
         flexDirection: "row",
         alignItems: "center",
-        paddingTop: StatusBar.currentHeight,
+        paddingTop: 12
     },
     arrow: {
         marginTop: 15,

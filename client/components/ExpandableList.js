@@ -9,7 +9,7 @@ export function ExpandableList({ item, onClickFunction }) {
         if (item.isExpanded) {
             setLayoutHeight(null);
         } else {
-            setLayoutHeight(0);
+            setLayoutHeight(3);
         }
     }, [item.isExpanded]);
 
@@ -17,16 +17,19 @@ export function ExpandableList({ item, onClickFunction }) {
         <View style={styles.container}>
             <TouchableOpacity style={styles.item} onPress={onClickFunction}>
                 <Text style={styles.itemText}>
-                    {item.categoryName}
+                    {item.ds_velocidade}
                 </Text>
-                <AntDesign style={styles.icon} name="down" size={24} color="black" />
+                <AntDesign style={styles.icon} name="down" size={24} color="white" />
             </TouchableOpacity>
             <View style={{ height: layoutHeight, overflow: "hidden", marginBottom: 40 }}>
                 {
-                    item.subcategory.map((item, key) => (
-                        <TouchableOpacity key={key} style={styles.content}>
-                            <Text style={styles.text}>
-                                {key}. {item.val}
+                    item.subcategory.map((item) => (
+                        <TouchableOpacity style={styles.content}>
+                            <Text style={styles.valorPlano}>
+                                {item.vl_plano}
+                            </Text>
+                            <Text style={styles.descricaoPlano}>
+                                {item.ds_plano}
                             </Text>
                             <View style={styles.separator} />
                         </TouchableOpacity>
@@ -42,24 +45,39 @@ const styles = StyleSheet.create({
         flex: 1
     },
     item: {
-        backgroundColor: "#EAEAEA",
-        padding: 20
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        backgroundColor: "#36B8B8",
+        padding: 20,
+        color: "white"
     },
     itemText: {
         fontSize: 24,
-        fontWeight: "500"
+        fontWeight: "500",
+        padding: 10,
+        color: "white"
     },
     icon: {
-        textAlign: "right"
+        paddingTop: 15,
+        paddingRight: 10
     },
     content: {
         paddingLeft: 10,
         paddingRight: 10,
-        backgroundColor: "#fff"
+        backgroundColor: "#EAEAEA",
+        borderBottomRightRadius: 10
     },
-    text: {
-        fontSize: 18,
-        padding: 10
+    valorPlano: {
+        fontSize: 30,
+        paddingTop: 25,
+        paddingLeft: 25
+    },
+    descricaoPlano: {
+        fontSize: 14,
+        paddingLeft: 25,
+        paddingTop: 15,
+        paddingBottom: 30
     },
     separator: {
         height: 0.5,
