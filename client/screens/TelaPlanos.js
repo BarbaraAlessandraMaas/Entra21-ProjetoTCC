@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
-import { ScrollView, View, Text, TouchableOpacity, StyleSheet, Modal, Image, LayoutAnimation, Platform, UIManager, StatusBar } from "react-native";
-import { useFonts } from 'expo-font';
+import React, { useRef, useState } from "react";
+import { ScrollView, View, Text, TouchableOpacity, StyleSheet, Modal, Image, LayoutAnimation, Platform, UIManager } from "react-native";
+import { useFonts } from "expo-font";
 import { ArrowBack } from "../components/ArrowBack";
 import { ExpandableList } from "../components/ExpandableList";
 
@@ -65,12 +65,7 @@ const CONTENT = [
 export function TelaPlanos() {
     const [modalOpen, setModalOpen] = useState(false);
     const [listDataSource, setListDataSource] = useState(CONTENT);
-    const [planoSelecionado, setPlanoSelecionado] = useState(null);
     const scrollRef = useRef(null);
-
-    if (Platform.OS === "android") {
-        UIManager.setLayoutAnimationEnabledExperimental(true);
-    }
 
     const updateLayout = (index) => {
         LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
@@ -84,18 +79,20 @@ export function TelaPlanos() {
                 : (array[placeindex]["isExpanded"]) = false
         );
 
-        setListDataSource(array);        
-        setPlanoSelecionado(index);
+        if (index >= 2) {
+            scrollRef.current.scrollToEnd({ animated: true });
+        } else {
+            scrollRef.current.scrollTo({
+                x: 0,
+                y: 0,
+                animated: true
+            });
+        }
+
+        setListDataSource(array);
     }
 
-    useFonts({ 'Roboto': require('../assets/Roboto-Regular.ttf') });    
-
-
-    useEffect(() => {
-        if (planoSelecionado >= 3) {
-            scrollRef.current.scrollToEnd();
-        }
-    }, [listDataSource, planoSelecionado]);
+    useFonts({ 'Roboto': require('../assets/Roboto-Regular.ttf') });
 
     return (
         <View style={styles.container}>
