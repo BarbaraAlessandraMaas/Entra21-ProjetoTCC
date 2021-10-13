@@ -1,23 +1,81 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, StatusBar, Modal, Image } from "react-native";
+import { ScrollView, View, Text, TouchableOpacity, StyleSheet, Modal, Image, LayoutAnimation, Platform, UIManager } from "react-native";
 import { useFonts } from 'expo-font';
-import { List } from 'react-native-paper';
-import { Ionicons } from '@expo/vector-icons';
+import { ArrowBack } from "../components/ArrowBack";
+import { ExpandableList } from "../components/ExpandableList";
+
+const CONTENT = [
+    {
+        isExpanded: false,
+        categoryName: "100 MEGA",
+        subcategory: [
+            { id: 1, val: "Descrição" }
+        ]
+    },
+    {
+        isExpanded: false,
+        categoryName: "250 MEGA",
+        subcategory: [
+            { id: 2, val: "Descrição" }
+        ]
+    },
+    {
+        isExpanded: false,
+        categoryName: "500 MEGA",
+        subcategory: [
+            { id: 3, val: "Descrição" }
+        ]
+    },
+    {
+        isExpanded: false,
+        categoryName: "1000 MEGA",
+        subcategory: [
+            { id: 4, val: "Descrição" }
+        ]
+    }
+]
 
 export function TelaPlanos() {
     const [modalOpen, setModalOpen] = useState(false);
+    const [listDataSource, setListDataSource] = useState(CONTENT);
+
+    if (Platform.OS === "android") {
+        UIManager.setLayoutAnimationEnabledExperimental(true);
+    }
+
+    const updateLayout = (index) => {
+        LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+        const array = [...listDataSource];
+
+        // array[index]["isExpanded"] = !array[index]["isExpanded"]; //Multipla Seleção
+
+        array.map((value, placeindex) =>
+            placeindex === index
+            ? (array[placeindex]["isExpanded"]) = !array[placeindex]["isExpanded"]
+            : (array[placeindex]["isExpanded"]) = false
+        );
+
+        setListDataSource(array);
+    }
 
     useFonts({ 'Roboto': require('../assets/Roboto-Regular.ttf') });
 
     return (
         <View style={styles.container}>
-            <TouchableOpacity>
-                <Ionicons name="arrow-back" size={24} color="black" />
-            </TouchableOpacity>
-            <Text style={styles.textPlanos}>Planos</Text>
-            <View>
-
-            </View>
+            <ArrowBack text="PLANOS" />
+            <ScrollView style={styles.list}>
+                {
+                    listDataSource.map((item, key) => (
+                        <ExpandableList
+                            key={item.categoryName}
+                            item={item}
+                            onClickFunction={() => {
+                                updateLayout(key);
+                            }}
+                        />
+                    ))
+                }
+            </ScrollView>
             <TouchableOpacity style={styles.buttons} onPress={() => setModalOpen(true)}>
                 <Text style={styles.buttonText}>Adquira</Text>
             </TouchableOpacity>
@@ -37,9 +95,13 @@ const styles = StyleSheet.create({
     container: {
         flex: 1
     },
-    textPlanos: {
-        paddingTop: StatusBar.currentHeight,
-        marginTop: 15
+    list: {
+        marginHorizontal: 30
+    },
+    headerButton: {
+        textAlign: "center",
+        justifyContent: "center",
+        fontSize: 18
     },
     buttons: {
         margin: 20,
