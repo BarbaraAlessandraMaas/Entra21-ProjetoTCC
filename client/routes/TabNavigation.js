@@ -6,6 +6,7 @@ import  { Notificacoes } from '../screens/Notificacoes';
 import  { MinhaConta } from '../screens/MinhaConta';
 import { FontAwesome } from '@expo/vector-icons';
 
+
 const Tab = createMaterialBottomTabNavigator();
 
 export function TabNavigation() {
@@ -20,7 +21,7 @@ export function TabNavigation() {
                     let iconName;
 
                     switch (route.name) {
-                        case "TelaInício":
+                        case "Tela Início":
                             iconName = focused ? "home" : "home" ;
                             break;
                         case "Meus Planos":
@@ -39,10 +40,11 @@ export function TabNavigation() {
                 }
             })}
         >
-            <Tab.Screen name="TelaInício" component={TelaInicio} />
+            <Tab.Screen name="Tela Início" component={TelaInicio} />
             <Tab.Screen name="Meus Planos" component={MeusPlanos} />
             <Tab.Screen name="Notificações" component={Notificacoes} />
             <Tab.Screen name="Minha Conta" component={MinhaConta} />
-        </Tab.Navigator>    
+                 
+        </Tab.Navigator>   
     );
 }

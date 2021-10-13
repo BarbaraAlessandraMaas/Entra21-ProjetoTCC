@@ -1,17 +1,22 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import  { TelaInicio } from '../screens/TelaInicio';
 import  { MeusPlanos }  from '../screens/MeusPlanos';
 import  { Notificacoes } from '../screens/Notificacoes';
 import  { MinhaConta } from '../screens/MinhaConta';
-import  { ButtonOptions } from '../components/ButtonOptions';
+import  { OptionsBar } from '../components/OptionsBar';
+import { TabNavigation } from './DrawerNavigation';
+import { DrawerNavigation } from './DrawerNavigation';
 
 const Stack = createNativeStackNavigator();
+
 
 export function StackNavigation() {    
   return (
     <Stack.Navigator initialRouteName='TelaInicio'>
-      <Stack.Screen name="TelaInicio" component={TelaInicio} options={{          
+      <Stack.Screen name="TelaInicioDrawer" component={TelaInicio} 
+            options={{          
              title: 'Tela inicial',
              headerTitleStyle: {
                color:'white',
@@ -20,7 +25,7 @@ export function StackNavigation() {
               backgroundColor: '#183557',
              },
              headerLeft: () => (
-               <ButtonOptions/>
+               <OptionsBar/>
              ),
            }}
          />
@@ -33,7 +38,7 @@ export function StackNavigation() {
               backgroundColor: '#183557',
              },
              headerLeft: () => (
-               <ButtonOptions/>
+               <OptionsBar/>
              ),
            }}
          />
@@ -46,7 +51,7 @@ export function StackNavigation() {
               backgroundColor: '#183557',
              },
              headerLeft: () => (
-               <ButtonOptions/>
+               <OptionsBar/>
              ),
            }}
          />
@@ -59,10 +64,23 @@ export function StackNavigation() {
               backgroundColor: '#183557',
              },
              headerLeft: () => (
-               <ButtonOptions/>
+               <OptionsBar/>
              ),
            }}
          />
     </Stack.Navigator>
+
+
+
   );
 }
+
+const Drawer = createDrawerNavigator()
+
+export default function TelaInicioDrawer() {
+    return (
+        <Drawer.Navigator>
+          <Drawer.Screen name="Tela Inicial" component={TelaInicio} />
+        </Drawer.Navigator>
+    );
+  }
