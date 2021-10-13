@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     cd_plano: {
       allowNull: false,
-      type: Sequelize.UUID,
+      type: DataTypes.UUID,
       references: {
         model: "planos",
         key: "cd_plano"
@@ -34,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     cd_cliente: {
       allowNull: false,
-      type: Sequelize.UUID,
+      type: DataTypes.UUID,
       references: {
         model: "clientes",
         key: "cd_cliente"

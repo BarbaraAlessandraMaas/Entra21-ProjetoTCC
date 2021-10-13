@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     cd_cliente: {
       allowNull: false,
-      type: Sequelize.UUID,
+      type: DataTypes.UUID,
       references: {
         model: "clientes",
         key: "cd_cliente"

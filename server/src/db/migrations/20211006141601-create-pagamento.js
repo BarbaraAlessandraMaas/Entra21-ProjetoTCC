@@ -6,7 +6,7 @@ module.exports = {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.INTEGER,
-        defaultValue: DataTypes.UUIDV4
+        defaultValue: Sequelize.UUIDV4
       },
       ds_status: {
         type: Sequelize.STRING,
