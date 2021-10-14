@@ -34,6 +34,8 @@ const mostrarPlanos = ({ item }) => {
 export function TelaInicio({ navigation }) { 
     return (
         <View>
+             <OptionsBar nome={"Bem vindo,"}
+                        dados={user.name}/>
             <View style={styles.containerDestaques}>
                 <Text style={styles.titulo}>Confira os Destaques</Text>
                 <FlatList

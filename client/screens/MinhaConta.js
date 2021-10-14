@@ -1,22 +1,33 @@
-import React, { useReducer } from 'react';
-import { StyleSheet, Text, View} from 'react-native';
+import React from "react";
+import { StyleSheet, Text, View, ScrollView} from 'react-native';
 import { OptionsBar } from '../components/OptionsBar';
 import { user } from '../screens/TelaInicio';
-import { EvilIcons } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 
 export function MinhaConta({ navigation }) {
     return (
-        <View>
+        <View style={styles.container}>
             <OptionsBar nome={user.name} dados={user.email} />
-            <View style={styles.container}>
+            <View style={styles.containericon}>
                 <View style={styles.icon}>
-                    <EvilIcons name="user" size={100} color="white" />
+                    <FontAwesome name="user-circle" size={60} color="#EAEAEA" />
                 </View>
                 <View>
-                    <Text style={styles.text}>Sua Conta</Text>
+                    <Text style={styles.title}>Sua Conta</Text>
                 </View>
+            </View>
+            <View style={styles.containerDados}>
+                <View style={styles.textArea}>
+                <Text style={styles.text}>Informações de perfil:</Text>
+                </View>
+                <ScrollView style={styles.informationsArea}>
+                </ScrollView>
+                <TouchableOpacity >
+                    <Text style={styles.botaoText}>Alterar Dados</Text>
+                </TouchableOpacity>
             </View>
         </View>
 
@@ -25,18 +36,60 @@ export function MinhaConta({ navigation }) {
 
 
 const styles = StyleSheet.create({
+    
     container:{
+        justifyContent:"center",
+        backgroundColor:"white",
+        display: "flex"
+    },
+
+    containerDados:{
+        display: "flex",
+        backgroundColor:"#EAEAEA",
+        margin: 20,
+        marginTop: 0,
+        height: 400,
+    },
+
+    containericon:{
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
         margin: 20,
-        marginLeft: 40 
+        marginBottom: 0,
+        backgroundColor: "#36B8B8",
+        borderTopLeftRadius: 15
+    },
+    textArea: {
+        paddingLeft: 45,
+        paddingTop: 20
     },
     icon: {
+        padding: 20,
+    },
+    title: {
+        marginLeft: 10,
+        fontSize: 18,
+        color: "#EAEAEA"
+    },
+    text: {
+        color:"#3a3a3a",
+        fontSize: 15
+    },
+    informationsArea: {
+        margin: 30,
+        marginTop: 20,
+        marginBottom: 40,
+        backgroundColor:"white",
+        borderRadius: 5
+    },
+    botaoText:{
+        textAlign:"center",
         backgroundColor: "#36B8B8",
-        borderRadius: 10000,
-        paddingTop:10,
-        paddingBottom: 10
-    }
+        height: 40,
+        color:"#EAEAEA",
+        fontSize: 16,
+        padding: 9
+    },
 }) 
 
