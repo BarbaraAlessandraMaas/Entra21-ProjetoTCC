@@ -1,31 +1,37 @@
-const { Clientes } = require("../src/db/models");
+const { Cliente } = require("../src/db/models");
+const db = require("../src/db/models");
 const createHttpError = require("http-errors");
 
 // Obter todos os clientes
 function getAllClientes(req, res, next) {
-    res.json(Clientes);
+    res.json(Cliente);
 };
 
-// Obter cliente pelo Id
-function getClienteById(req, res, next) {
-    const clienteId = req.params.id;
+// Obter cliente
+function getCliente(req, res, next) {
+    const userId = res.locals.userId;
 
-    const cliente = Clientes.find(cliente => cliente.id == clienteId);
+    try {
+        const cliente = await Cliente.findOne({ where: {id: clienteId } });
 
-    if (!cliente) {
-        res.status(404).json({ message: "cliente não encontrado!" });       
+        if (!cliente) {
+            throw new createHttpError(404, "Cliente não encontrado")
+        }
+
+        res.json(cliente);
+    } catch (error) {
+        console.log(error);
+        next(error);
     }
-
-    res.json(cliente);
 }
 
 // Criar um cliente
 async function createCliente(req, res, next) {
-    const { name, email, cpf, telefone, password } = req.body;
+    const { nm_cliente, ds_email, nr_cpf, nr_telefone, ds_senha } = req.body;
     try {
-        const [cliente, created] = await Clientes.findOrCreate({
-            where: { email: email.toLowerCase() },
-            defaults: { name, cpf, telefone, password }
+        const [cliente, created] = await Cliente.findOrCreate({
+            where: { ds_email },
+            defaults: { nm_cliente, nr_cpf, nr_telefone, ds_senha }
         });
 
         if (!created) {
@@ -75,7 +81,7 @@ function deleteCliente(req, res, next) {
 
 module.exports = {
     getAllClientes,
-    getClienteById,
+    getCliente,
     createCliente,
     updateCliente,
     deleteCliente

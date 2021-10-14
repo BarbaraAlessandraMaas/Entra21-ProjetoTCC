@@ -15,6 +15,7 @@ app.use(morgan("dev"));
 // Definindo as rotas
 app.use("/api/clientes", require("./routes/clientesRoutes"));
 app.use("/api/funcionario", require("./routes/funcionarioRoutes"));
+app.use("/api/auth", require("../routes/authRoutes"));
 
 // Definindo os middlewares
 app.use(require("./middlewares/errorHandlerMiddleware"))

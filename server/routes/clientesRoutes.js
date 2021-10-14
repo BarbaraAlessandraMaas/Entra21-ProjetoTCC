@@ -1,14 +1,14 @@
 const express = require("express");
 const router = express.Router();
 
-// Importando o controller
+const authMiddleware = require("../middlewares/authMiddleware");
 const clientesControllers = require("../controllers/clientesControllers");
 
 // Obter todos os usuários
 router.get("/", clientesControllers.getAllClientes);
 
 // Obter um usuário específico
-router.get("/:id", clientesControllers.getClienteById);
+router.get("/:id", authMiddleware, clientesControllers.getCliente);
 
 // Criar um usuário
 router.post("/", clientesControllers.createCliente);

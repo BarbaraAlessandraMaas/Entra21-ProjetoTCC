@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 module.exports = (sequelize, DataTypes) => {
   class Cliente extends Model {
     static associate(models) {
+      this.belongsToMany(models.Chat, { through: "clientes_chats" })
       this.hasOne(models.Endereco, { foreignKey: "cd_cliente" });
       this.hasMany(models.Pagamento, { foreignKey: "cd_cliente" });
       this.belongsToMany(models.Funcionario, { through: "assistencia", foreignKey: "cd_cliente" });
