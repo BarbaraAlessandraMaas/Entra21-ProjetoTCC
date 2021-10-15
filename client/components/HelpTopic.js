@@ -6,7 +6,7 @@ export function HelpTopic(props) {
     return (
         <View style={styles.container}>
             <View style={styles.topic}>
-                    <Text style={styles.topicText}>{props.text}</Text>
+                <Text style={styles.topicText}>{props.text}</Text>
                 <Ionicons name="chevron-forward-outline" size={27} color="black" />
             </View>
         </View>

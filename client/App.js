@@ -6,9 +6,9 @@ import { TelaTopico } from './screens/TelaTopico';
 
 export default function App() {
   return (
-    // <TelaOpcoes />
+    <TelaOpcoes />
     // <TelaAjuda />
-    <TelaTopico/>
+    // <TelaTopico />
   );
 }
 
