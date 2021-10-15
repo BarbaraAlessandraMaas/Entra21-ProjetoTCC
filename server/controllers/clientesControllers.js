@@ -8,11 +8,11 @@ function getAllClientes(req, res, next) {
 };
 
 // Obter cliente
-function getCliente(req, res, next) {
-    const userId = res.locals.userId;
+async function getCliente(req, res, next) {
+    const clienteId = res.locals.clienteId;
 
     try {
-        const cliente = await Cliente.findOne({ where: {id: clienteId } });
+        const cliente = await Cliente.findOne({ where: { id: clienteId } });
 
         if (!cliente) {
             throw new createHttpError(404, "Cliente não encontrado")

@@ -5,7 +5,7 @@ module.exports = {
       cd_pagamento: {
         allowNull: false,
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4
       },
       ds_status: {

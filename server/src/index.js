@@ -16,6 +16,8 @@ app.use(morgan("dev"));
 app.use("/api/clientes", require("./routes/clientesRoutes"));
 app.use("/api/funcionario", require("./routes/funcionarioRoutes"));
 app.use("/api/auth", require("../routes/authRoutes"));
+app.use("/api/chats", require("../routes/chatsRoutes"));
+app.use("api/messages", require("../routes/messagesRoutes"));
 
 // Definindo os middlewares
 app.use(require("./middlewares/errorHandlerMiddleware"))
