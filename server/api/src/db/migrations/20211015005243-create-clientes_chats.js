@@ -1,36 +1,30 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('messages', {
-      id: {
+    await queryInterface.createTable('clientes_chats', {
+      cliente_id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
-      },
-      message: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      cd_cliente: {
-        allowNull: false,
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
         references: {
           model: "clientes",
-          key: "id"
+          key: "cd_cliente"
         },
         onDelete: "CASCADE",
         onUpdate: "CASCADE"
       },
       chat_id: {
         allowNull: false,
+        primaryKey: true,
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
         references: {
           model: "chats",
           key: "id"
         },
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE"
       },
       created_at: {
         allowNull: false,
@@ -43,6 +37,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('messages');
+    await queryInterface.dropTable('clientes_chats');
   }
 };
