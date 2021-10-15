@@ -69,9 +69,6 @@ export function StackNavigation() {
            }}
          />
     </Stack.Navigator>
-
-
-
   );
 }
 
