@@ -16,9 +16,11 @@ export function TelaOpcoes() {
             <TouchableOpacity>
                 <OptionDrawer icon="help" text="Ajuda" />
             </TouchableOpacity>
+
             <TouchableOpacity onPress={() => setModalOpen(true)}>
                 <OptionDrawer icon="document-text-outline" text="Sobre" />
             </TouchableOpacity>
+            
             <TouchableOpacity>
                 <OptionDrawer icon="log-out-outline" text="Log Out" />
             </TouchableOpacity>
@@ -35,6 +37,7 @@ export function TelaOpcoes() {
             >
                 <View style={styles.outDrawer}>
                     <StatusBar barStyle="dark-content" backgroundColor="white" />
+
                     <TouchableOpacity onPress={() => drawer.current.openDrawer()}>
                         <Ionicons name="menu" size={30} color="black" />
                     </TouchableOpacity>
@@ -46,6 +49,7 @@ export function TelaOpcoes() {
                     <TouchableOpacity style={styles.arrow} onPress={() => setModalOpen(false)}>
                         <Ionicons name="arrow-back" size={24} color="white" />
                     </TouchableOpacity>
+                    
                     <View style={styles.text}>
                         <Text style={styles.textModalTop}>
                             Este aplicativo é um projeto desenvolvido no curso de React /React Native do Entra21, em Timbó, para o Trabalho de Conclusão de Curso (TCC).

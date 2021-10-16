@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { View, StyleSheet, ScrollView, Text, TouchableOpacity, Modal } from "react-native";
 import { ArrowBack } from "../components/ArrowBack";
-import { Ionicons } from '@expo/vector-icons';
+import { HelpSolution } from "../components/HelpSolution";
+import { Ionicons } from "@expo/vector-icons";
 
 export function TelaTopico() {
     const [modalOpen, setModalOpen] = useState(false);
@@ -11,16 +12,16 @@ export function TelaTopico() {
             <ArrowBack text="TÓPICO" />
 
             <ScrollView style={styles.information}>
-                <Text style={styles.textInformation}>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                <HelpSolution
+                    text="Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                     sed do eiusmod tempor incididunt ut labore et dolore magna
                     aliqua. Ut enim ad minim veniam, quis nostrud exercitation
                     ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
                     aute irure dolor in reprehenderit in voluptate velit esse cillum
                     dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
                     non proident, sunt in culpa qui officia deserunt mollit anim id est
-                    laborum.
-                </Text>
+                    laborum."
+                />
             </ScrollView>
 
             <View style={styles.contact}>
@@ -28,19 +29,18 @@ export function TelaTopico() {
                     Ainda precisa de ajuda? {"\n"}
                     Estamos aqui para te ajudar!
                 </Text>
+
                 <TouchableOpacity>
                     <Text style={styles.textButtonContact} onPress={() => setModalOpen(true)}>Entre em contato</Text>
                 </TouchableOpacity>
             </View>
 
             <Modal visible={modalOpen} animationType="slide">
-                <View>
-
-                </View>
                 <View style={styles.viewIcon}>
                     <TouchableOpacity onPress={() => setModalOpen(false)}>
                         <Ionicons name="arrow-up" size={24} color="white" />
                     </TouchableOpacity>
+
                     <TouchableOpacity onPress={() => setModalOpen(false)}>
                         <Text style={styles.textIcon}>Voltar</Text>
                     </TouchableOpacity>
@@ -49,14 +49,17 @@ export function TelaTopico() {
                 <View style={styles.modalAssist}>
                     <View style={styles.content}>
                         <Text style={styles.textContent}>Como você deseja prosseguir?</Text>
+
                         <TouchableOpacity style={styles.buttonContent}>
                             <Ionicons name="chatbubble" size={24} color="white" />
                             <Text style={styles.textButtonContent}>Converse conosco</Text>
                         </TouchableOpacity>
+
                         <TouchableOpacity style={styles.buttonContent}>
                             <Ionicons name="call-sharp" size={24} color="white" />
                             <Text style={styles.textButtonContent}>Ligue-nos</Text>
                         </TouchableOpacity>
+                        
                         <Text style={styles.textContent}>ou</Text>
                         <Text style={styles.textContent}>Visite a empresa Exus mais próxima de você!</Text>
                     </View>
@@ -78,10 +81,6 @@ const styles = StyleSheet.create({
         marginBottom: 30,
         borderWidth: 1,
         borderColor: "#EAEAEA"
-    },
-    textInformation: {
-        fontSize: 18,
-        textAlign: "justify"
     },
     contact: {
         backgroundColor: "#EAEAEA",

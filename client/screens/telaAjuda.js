@@ -4,11 +4,13 @@ import { ArrowBack } from "../components/ArrowBack";
 import { HelpTopic } from "../components/HelpTopic";
 
 export function TelaAjuda() {
-    return(
+    return (
         <View style={styles.container}>
             <ArrowBack text="AJUDA" />
+
             <View style={styles.content}>
                 <Text style={styles.helpText}>Explore alguns de nossos tópicos para obter ajuda</Text>
+                
                 <ScrollView>
                     <TouchableOpacity><HelpTopic text="aaaaaaaaaaaaaaaaaa" /></TouchableOpacity>
                     <TouchableOpacity><HelpTopic text="aaaaaaaaaaaaaaaaaa" /></TouchableOpacity>
