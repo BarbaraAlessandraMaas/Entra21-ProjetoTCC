@@ -1,15 +1,16 @@
 import React from "react";
 import { Text, TouchableOpacity, View, StyleSheet } from "react-native";
-import { FontAwesome } from '@expo/vector-icons';
+import { useFonts } from "expo-font";
+import { Ionicons } from "@expo/vector-icons";
 
-export function Checkbox({ checked, onPress, message }) {    
+export function Checkbox({ checked, onPress, message }) {
+
+    useFonts({ "Roboto": require("../assets/Roboto-Regular.ttf") });
+
     return (
         <TouchableOpacity style={styles.container} onPress={onPress}>
             <View style={[styles.checkbox, checked ? { backgroundColor: "#36B8B8" } : {}]}>
-                {
-                    checked && 
-                    <FontAwesome name="check" size={22} color={checked ? "white" : "black"} />
-                }
+                { checked && <Ionicons name="checkmark" size={24} color="white" /> }
             </View>
             <Text style={styles.message}>{message}</Text>
         </TouchableOpacity>
@@ -26,14 +27,14 @@ const styles = StyleSheet.create({
         height: 24,
         width: 24 ,
         backgroundColor: "white",
-        borderRadius: 4,
+        borderRadius: 5,
         justifyContent: "center",
         alignItems: "center",        
     },
     message: {
-        fontFamily: 'Antic-Slab',
+        fontFamily: "Roboto",
         paddingLeft: 10,
-        fontSize: 15,
+        fontSize: 14,
         color: "white"
     }
 });
