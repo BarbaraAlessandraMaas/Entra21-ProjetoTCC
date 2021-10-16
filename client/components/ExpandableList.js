@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { TouchableOpacity, View, StyleSheet, Text } from "react-native";
-import { AntDesign } from '@expo/vector-icons';
+import { AntDesign } from "@expo/vector-icons";
 
 export function ExpandableList({ item, onClickFunction }) {
     const [layoutHeight, setLayoutHeight] = useState(0);
@@ -16,11 +16,10 @@ export function ExpandableList({ item, onClickFunction }) {
     return (
         <View style={styles.container}>
             <TouchableOpacity style={styles.item} onPress={onClickFunction}>
-                <Text style={styles.itemText}>
-                    {item.ds_velocidade}
-                </Text>
+                <Text style={styles.itemText}>{item.ds_velocidade}</Text>
                 <AntDesign style={styles.icon} name="down" size={24} color="white" />
             </TouchableOpacity>
+
             <View style={{ height: layoutHeight, overflow: "hidden", marginBottom: 40 }}>
                 {
                     item.subcategory.map((item) => (

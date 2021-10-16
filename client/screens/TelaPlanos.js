@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { ScrollView, View, Text, TouchableOpacity, StyleSheet, Modal, Image, LayoutAnimation, Platform, UIManager } from "react-native";
+import { ScrollView, View, Text, TouchableOpacity, StyleSheet, Modal, Image, LayoutAnimation } from "react-native";
 import { useFonts } from "expo-font";
 import { ArrowBack } from "../components/ArrowBack";
 import { ExpandableList } from "../components/ExpandableList";
@@ -71,23 +71,16 @@ export function TelaPlanos() {
         LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
         const array = [...listDataSource];
 
-        // array[index]["isExpanded"] = !array[index]["isExpanded"]; //Multipla Seleção
-
+        // Permite a seleção simples
         array.map((value, placeindex) =>
             placeindex === index
                 ? (array[placeindex]["isExpanded"]) = !array[placeindex]["isExpanded"]
                 : (array[placeindex]["isExpanded"]) = false
         );
 
-        if (index >= 2) {
-            scrollRef.current.scrollToEnd({ animated: true });
-        } else {
-            scrollRef.current.scrollTo({
-                x: 0,
-                y: 0,
-                animated: true
-            });
-        }
+        index >= 2
+            ? scrollRef.current.scrollToEnd({ animated: true })
+            : scrollRef.current.scrollTo({ x: 0, y: 0, animated: true });
 
         setListDataSource(array);
     }
@@ -121,10 +114,12 @@ export function TelaPlanos() {
             <Modal visible={modalOpen} animationType="slide">
                 <View style={styles.modalContent}>
                     <Image source={require("../assets/logo.png")} style={styles.image} />
+
                     <Text style={styles.modalText}>
                         Estes são todos os planos disponíveis na sua região. {"\n\n"}
                         Para adquirir um plano, visite a empresa Exus mais próxima de você!
                     </Text>
+
                     <TouchableOpacity style={styles.buttons} onPress={() => setModalOpen(false)}><Text style={styles.buttonText}>Continuar</Text></TouchableOpacity>
                 </View>
             </Modal>
