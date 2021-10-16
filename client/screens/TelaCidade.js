@@ -6,13 +6,8 @@ export function TelaCidade() {
     return (
         <View style={styles.container}>
             <ArrowBack text="Voltar" />
-            <View style={styles.content}>
-                <Text style={styles.textContent}>
-                    Desculpe, ainda não temos planos disponíveis na sua região.
-                    Pedimos a sua contribuição para informar o município que você
-                    gostaria que tivessem planos.
-                </Text>
 
+            <View style={styles.content}>
                 <Text style={styles.textContent}>
                     Desculpe, ainda não temos planos disponíveis na sua região.
                     Pedimos a sua contribuição para informar o município que você
@@ -22,8 +17,8 @@ export function TelaCidade() {
                 <TextInput style={styles.selectCity} placeholder="NOME DA CIDADE" />
 
                 <TouchableOpacity>
-                <Text style={styles.buttonConclude}>Concluir</Text>
-            </TouchableOpacity>
+                    <Text style={styles.buttonConclude}>Concluir</Text>
+                </TouchableOpacity>
             </View>
         </View>
     );

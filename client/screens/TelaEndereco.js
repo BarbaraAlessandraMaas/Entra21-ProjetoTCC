@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, TextInput, View, TouchableOpacity, Text, Modal } from "react-native";
 import { ArrowBack } from "../components/ArrowBack";
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons } from "@expo/vector-icons";
 
 export function TelaEndereco() {
     const [modalOpen, setModalOpen] = useState(false);
@@ -10,6 +10,7 @@ export function TelaEndereco() {
         <View style={styles.container}>
             <View style={styles.content}>
                 <ArrowBack text="ENDEREÇO" />
+
                 <View style={styles.form}>
                     <TextInput
                         placeholder="LOGRADOURO"
