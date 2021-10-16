@@ -1,6 +1,8 @@
 import React from "react";
 import { Text, View, StyleSheet, TouchableOpacity, StatusBar } from "react-native";
 import { Ionicons } from '@expo/vector-icons';
+
+
 export function OptionsBar(props) {
     if (!props.dados) {
         return (
@@ -38,6 +40,7 @@ export function OptionsBar(props) {
 
 const styles = StyleSheet.create({
     status: {
+        display: "flex",
         backgroundColor: "#183557",
         borderBottomRightRadius: 20,
         flexDirection: "row",
@@ -70,5 +73,5 @@ const styles = StyleSheet.create({
     container: {
         display: "flex",
         alignContent: "center"
-    }
+    },
 });

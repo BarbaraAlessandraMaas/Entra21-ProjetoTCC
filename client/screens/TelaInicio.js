@@ -49,9 +49,6 @@ export function TelaInicio({ navigation }) {
                 </View>
                 <View style={styles.containerAllPlans}>
                     <TouchableOpacity
-                        onPress={() => {
-                            navigation.navigate("Meus Planos")
-                        }}
                         style={styles.link}
                     >
                         <Text style={styles.botaoText}>Veja todo os planos{"\n"}disponíveis aqui</Text>

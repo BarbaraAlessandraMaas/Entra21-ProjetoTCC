@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, ScrollView, Modal, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Modal, TouchableOpacity, TextInput, Button } from 'react-native';
 import { OptionsBar } from '../components/OptionsBar';
 import { user } from '../screens/TelaInicio';
 import { FontAwesome } from '@expo/vector-icons';
@@ -39,9 +39,18 @@ export function MinhaConta({ navigation }) {
                         <Text style={styles.textIcon}>Voltar</Text>
                     </TouchableOpacity>
                 </View>
-
                 <View style={styles.background}>
-                    
+                <View>    
+                    <Text style={styles.modalTitle}>Alterar Dados</Text>
+                </View>
+                <View style={styles.containerCampos}>
+                    <TextInput style={styles.campos} placeholder="E-mail"></TextInput>
+                    <TextInput style={styles.campos} placeholder="Telefone"></TextInput>
+                    <TextInput style={styles.campos} placeholder="Senha"></TextInput>
+                </View>
+                <View style={styles.containerBotao}>
+                    <TouchableOpacity style={styles.botaoModal}><Text style={styles.botaoText}>Confirmar</Text></TouchableOpacity>
+                </View>
                 </View>
             </Modal>
         </View>
@@ -55,7 +64,7 @@ const styles = StyleSheet.create({
     container: {
         justifyContent: "center",
         backgroundColor: "white",
-        display: "flex"
+        display: "flex",
     },
 
     containerDados: {
@@ -128,7 +137,31 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#EAEAEA",
         height: "100%",
+        alignItems: "center"
+    },
+    modalTitle: {
+        fontSize: 18,
+        color: "black",
+        textAlign: "center",
+        margin: 32
+    },
+    campos: {
+        width: 280,
+        height: 40,
+        marginBottom: 15,
+        marginHorizontal: 40,
+        backgroundColor: "#36B8B8",
+        paddingLeft: 10,
+
+    },
+    containerCampos:{
+        marginBottom: 35
+    },
+    botaoModal:{
+        width: 100,
+        alignItems: "center",
         justifyContent: "center"
-    }
+    },
+
 })
 
