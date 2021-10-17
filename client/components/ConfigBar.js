@@ -1,27 +1,27 @@
-import * as React from 'react';
-import { View, StyleSheet, TouchableOpacity, Text, Switch, StatusBar, Modal, TextInput } from "react-native";
-import { Ionicons } from '@expo/vector-icons';
-
-
+import React, { useState } from "react";
+import { View, StyleSheet, TouchableOpacity, Text, StatusBar, Modal } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { OptionSwitch } from "./OptionSwitch";
 
 export function ConfigBar(props) {
-    
-    
-    const [isEnabled, setIsEnabled] = useState(false);
-    const [modalOpen, setModalOpen] = React.useState(null);
+    const [modalOpen, setModalOpen] = useState(null);
+
     return (
         <View style={styles.container}>
             <StatusBar barStyle="white" backgroundColor="#183557" />
+
             <View style={styles.status}>
-                <TouchableOpacity style={styles.bars}>
+                <TouchableOpacity style={styles.menuButton}>
                     <Ionicons name="menu" size={27} color="white" />
                 </TouchableOpacity>
+
                 <View>
-                    <Text style={styles.textNome2}>{props.nome}</Text>
+                    <Text style={styles.textInitialScreen}>{props.nome}</Text>
                 </View>
-                <View style={styles.rightBar}>
+
+                <View style={styles.optionsButton}>
                     <TouchableOpacity onPress={() => setModalOpen(true)} style={styles.settings}>
-                        <Ionicons name="settings-outline" size={24} color="white" />
+                        <Ionicons name="settings-sharp" size={24} color="white" />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -35,42 +35,33 @@ export function ConfigBar(props) {
                         <Text style={styles.textIcon}>Voltar</Text>
                     </TouchableOpacity>
                 </View>
+
                 <View style={styles.background}>
-                    <View>
-                        <Text style={styles.modalTitle}>Atualizaçôes</Text>
-                        <Text style={styles.modalTitle}>Ao desativar, você não receberá mais as atualizações dos planos.</Text>
-                        <Switch>
-                        </Switch>
-                    </View>
-                    <View style={styles.containerCampos}>
-                        <Text style={styles.modalTitle}>Novidades</Text>
-                        <Text style={styles.modalTitle}>Permite que você receba as novidades dos planos existentes e novos.</Text>
-                        <Switch>
-                        </Switch>
-                    </View>
-                    <View style={styles.containerBotao}>
-                        <Text style={styles.modalTitle}>Gerais</Text>
-                        <Text style={styles.modalTitle}>Notifica o status atual dos serviços, caso estejam com algum problema.</Text>
-                        <Switch>
-                        </Switch>
-                    </View>
-                    <View style={styles.containerBotao}>
-                        <Text style={styles.modalTitle}>Destivar</Text>
-                        <Text style={styles.modalTitle}>Ao desativar, você não receberá mais nenhuma notificação.</Text>
-                        <Switch>
-                        </Switch>
-                    </View>
+                    <OptionSwitch 
+                        title="Atualizações"
+                        description="Ao desativar esta opção, você não receberá mais as atualizações dos planos."
+                    />
+
+                    <OptionSwitch
+                        title="Novidades"
+                        description="Esta opção permite que você receba as novidades dos planos existentes, e de planos novos. Ao desativar, você nçao recerá mais essas novidades."
+                    />
+
+                    <OptionSwitch
+                        title="Gerais"
+                        description="Notifica o status atual dos serviços, caso estejam com algum problema. Desativar essa opção irá fazer com que você não receba mais notificações gerais."
+                    />
                 </View>
             </Modal>
         </View>
-
-
-    )
-
+    );
 }
 
-
 const styles = StyleSheet.create({
+    container: {
+        display: "flex",
+        alignContent: "center"
+    },
     status: {
         display: "flex",
         backgroundColor: "#183557",
@@ -79,68 +70,38 @@ const styles = StyleSheet.create({
         alignItems: "center",
         paddingTop: 10
     },
-    bars: {
+    menuButton: {
         marginRight: 15,
         marginLeft: 15
     },
-    textNome: {
-        lineHeight: 25,
-        marginTop: 15,
-        fontSize: 18,
-        color: "white"
-    },
-    textNome2: {
+    textInitialScreen: {
         lineHeight: 25,
         marginTop: 17,
         marginBottom: 20,
         fontSize: 18,
         color: "white"
     },
-    textEmail: {
-        lineHeight: 25,
-        marginBottom: 15,
-        fontSize: 14,
-        color: "white"
-    },
-    container: {
-        display: "flex",
-        alignContent: "center"
-    },
-    rightBar: {
+    optionsButton: {
         flex: 1
     },
     settings: {
         alignItems: "flex-end",
         marginRight: 25
     },
-    //Modal
-    background: {
-        flex: 1,
+    viewIcon: {
+        display: "flex",
+        flexDirection: "row",
         backgroundColor: "#EAEAEA",
-        height: "100%",
-        alignItems: "center"
+        paddingLeft: 15,
+        paddingTop: 25
     },
-    modalTitle: {
+    textIcon: {
+        paddingLeft: 15,
         fontSize: 18,
-        color: "black",
-        margin: 22,
-        marginBottom: 0
+        color: "black"
     },
-    campos: {
-        width: 280,
-        height: 40,
-        marginBottom: 15,
-        marginHorizontal: 40,
-        backgroundColor: "#36B8B8",
-        paddingLeft: 10,
-
-    },
-    containerCampos: {
-        marginBottom: 0
-    },
-    botaoModal: {
-        width: 100,
-        alignItems: "center",
-        justifyContent: "center"
-    },
+    background: {
+        backgroundColor: "#EAEAEA",
+        height: "100%"
+    }
 });

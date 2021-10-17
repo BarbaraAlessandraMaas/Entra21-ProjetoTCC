@@ -1,9 +1,6 @@
-import React from 'react';
-import { StyleSheet,  View, Text, FlatList, TouchableOpacity, ScrollView } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
-import { ConfigBar } from '../components/ConfigBar';
-
-
+import React, { useState } from "react";
+import { StyleSheet, View, Text, FlatList } from "react-native";
+import { ConfigBar } from "../components/ConfigBar";
 
 const DadosNotificacoes = [
     { id: 81239, assunto: "Novidades", descricao: "Há novidades em nossos serviços. Venha conferir!", date: "14/2" },
@@ -16,13 +13,11 @@ const DadosNotificacoes = [
     { id: 44848, assunto: "Promoções", descricao: "Há planos em promoção. Aproveite a oportunidade.", date: "3/20" }
 ]
 
-
-export function Notificacoes({ navigation }) {
- 
-
+export function TelaNotificacoes({ navigation }) {
     return (
         <View>
             <ConfigBar nome="Notificações" />
+
             <View style={styles.scroll}>
                 <FlatList
                     data={DadosNotificacoes}
@@ -35,13 +30,13 @@ export function Notificacoes({ navigation }) {
     );
 }
 
-
 const MostrarNotificacoes = ({ item }) => {
     return (
         <View style={styles.cards}>
             <View>
                 <Text style={styles.titulo}>{item.assunto}</Text>
             </View>
+
             <View style={styles.description}>
                 <Text style={styles.valorCards}>{item.descricao}</Text>
                 <Text style={styles.valorDate}>{item.date}</Text>
@@ -87,5 +82,4 @@ const styles = StyleSheet.create({
         paddingRight: 3,
         paddingBottom: 3
     }
-
-})
+});

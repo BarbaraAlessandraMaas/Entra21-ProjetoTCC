@@ -1,16 +1,15 @@
 import React from "react";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
-import  { TelaInicio } from '../screens/TelaInicio';
-import  { MeusPlanos }  from '../screens/MeusPlanos';
-import  { Notificacoes } from '../screens/Notificacoes';
-import  { MinhaConta } from '../screens/MinhaConta';
-import { FontAwesome } from '@expo/vector-icons';
-
+import { TelaInicio } from "../screens/TelaInicio";
+import { MeusPlanos } from "../screens/MeusPlanos";
+import { TelaNotificacoes } from "../screens/TelaNotificacoes";
+import { MinhaConta } from "../screens/MinhaConta";
+import { Ionicons } from "@expo/vector-icons";
 
 const Tab = createMaterialBottomTabNavigator();
 
 export function TabNavigation() {
-    return (    
+    return (
         <Tab.Navigator
             initialRouteName="TelaInicio"
             barStyle={{ backgroundColor: "#183557" }}
@@ -21,30 +20,27 @@ export function TabNavigation() {
                     let iconName;
 
                     switch (route.name) {
-                        case "Tela Início":
-                            iconName = focused ? "home" : "home" ;
+                        case "Início":
+                            iconName = focused ? "home" : "home";
                             break;
                         case "Meus Planos":
-                            iconName = focused ? 'signal' : 'signal';
+                            iconName = focused ? "albums" : "albums";
                             break;
                         case "Notificações":
-                            iconName = focused ? 'bell' : 'bell';
+                            iconName = focused ? "notifications" : "notifications";
                             break;
                         case "Minha Conta":
-                            iconName = focused ? 'user' : 'user';
-                        break;
-                        default:
-                            return
+                            iconName = focused ? "person-circle" : "person-circle";
+                            break;
                     }
-                    return <FontAwesome name={iconName} size={22} color={color} />
+                    return <Ionicons name={iconName} size={22} color="white" />
                 }
             })}
         >
-            <Tab.Screen name="Tela Início" component={TelaInicio} />
+            <Tab.Screen name="Início" component={TelaInicio} />
             <Tab.Screen name="Meus Planos" component={MeusPlanos} />
-            <Tab.Screen name="Notificações" component={Notificacoes} />
+            <Tab.Screen name="Notificações" component={TelaNotificacoes} />
             <Tab.Screen name="Minha Conta" component={MinhaConta} />
-                 
-        </Tab.Navigator>   
+        </Tab.Navigator>
     );
 }
