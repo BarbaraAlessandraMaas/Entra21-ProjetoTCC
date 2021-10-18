@@ -11,7 +11,6 @@ module.exports = {
     logging: false,
     define: {
       underscored: true,
-      timestamps: false
     }
   }
 };

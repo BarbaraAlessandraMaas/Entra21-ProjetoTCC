@@ -1,9 +1,9 @@
-const { QueryTypes } = require("sequelize/types");
+const { QueryTypes } = require("sequelize");
 const { Message, Chat, sequelize } = require("../src/db/models");
 const createHttpError = require("http-errors");
 
 async function createMessage(req, res, next) {
-    const clienteId = res.locals.clienteId;
+    const clienteId = res.locals.cd_cliente;
     const { message, chatId } = req.body;
 
     try {
@@ -13,7 +13,7 @@ async function createMessage(req, res, next) {
             throw new createHttpError(404, "Chat não encontrado");
         }
 
-        const clienteInChat = chat.clientes.find(cliente => cd_cliente === clienteId);
+        const clienteInChat = chat.clientes.find(cliente => cliente.cd_cliente === clienteId);
 
         if (!clienteInChat) {
             throw new createHttpError(400, "Cliente não faz parte dess e chat");

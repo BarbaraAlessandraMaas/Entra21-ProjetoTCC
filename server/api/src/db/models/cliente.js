@@ -9,17 +9,17 @@ module.exports = (sequelize, DataTypes) => {
       this.hasOne(models.Endereco, { foreignKey: "cd_cliente" });
       this.hasMany(models.Pagamento, { foreignKey: "cd_cliente" });
       this.belongsToMany(models.Funcionario, { through: "assistencia", foreignKey: "cd_cliente" });
-      this.belongsTo(models.Message, { foreignKey: "cliente_id" });
+      this.belongsTo(models.Message, { foreignKey: "cd_cliente" });
     }
 
-    isPasswordValid(password) {
-      return bcrypt.compareSync(password, this.password);
+    isPasswordValid(ds_senha) {
+      return bcrypt.compareSync(ds_senha, this.ds_senha);
     }
 
       toJSON() {
     return {
       ...this.get(),
-      password: undefined
+      ds_senha: undefined
     }
   }
 };
@@ -41,8 +41,11 @@ Cliente.init({
   ds_senha: {
     type: DataTypes.STRING,
     allowNull: false,
-    set(password) {
-      this.setDataValue("password", bcrypt.hashSync(password, 10));
+    validate: {
+      notNull: { args: true, msg: "You must enter a password" }
+    },
+    set(ds_senha) {
+      this.setDataValue("ds_senha", bcrypt.hashSync(ds_senha, 10));
     }
   },
   nr_telefone: {

@@ -3,13 +3,20 @@ const db = require("../src/db/models");
 const createHttpError = require("http-errors");
 
 // Obter todos os clientes
-function getAllClientes(req, res, next) {
-    res.json(Cliente);
+async function getAllClientes(req, res, next) {
+    try {
+        const users = await Cliente.findAll();
+
+        res.json(users);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ message: "Server error" });
+    }    
 };
 
 // Obter cliente
 async function getCliente(req, res, next) {
-    const clienteId = res.locals.clienteId;
+    const clienteId = res.locals.cd_cliente;
 
     try {
         const cliente = await Cliente.findOne({ where: { id: clienteId } });
@@ -41,6 +48,10 @@ async function createCliente(req, res, next) {
     } catch (error) {
         console.log(error);
         next(error);
+
+
+
+        
     }
     
 }

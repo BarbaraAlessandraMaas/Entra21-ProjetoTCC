@@ -1,9 +1,9 @@
 const createHttpError = require("http-errors");
-const { QueryTypes } = require("sequelize/types");
+const { QueryTypes } = require("sequelize");
 const { Chat, Cliente, sequelize } = require("../src/db/models");
 
 async function createChat(req, res, next) {
-    const {nm_cliente, clientes  } = req.body;
+    const { nm_cliente, clientes  } = req.body;
 
     const transaction = await sequelize.transaction();
     try {
@@ -24,9 +24,9 @@ async function createChat(req, res, next) {
         console.log(error);
         next(error);
     }
-
+}
     async function getChats(req, res, next) {
-        const clienteId = res.locals.clienteId;
+        const clienteId = res.locals.cd_cliente;
 
         try {
             const chats = await sequelize.query(`
@@ -79,7 +79,7 @@ async function createChat(req, res, next) {
         }
     }
 
-}
+
 
 module.exports = {
     createChat,

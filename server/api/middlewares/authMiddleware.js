@@ -9,7 +9,7 @@ module.exports = (req, res, next) => {
         const decoded = jwt.verify(accessToken, process.env.TOKEN_SECRET);
 
         console.log(decoded.sub)
-        res.locals.userId = decoded.sub
+        res.locals.cd_cliente = decoded.sub
     } catch (error) {
         console.log(error)
         throw new createHttpError(401, "Access Token inválido")
