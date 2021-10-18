@@ -1,4 +1,5 @@
 import React from "react";
+import { TelaDetalhes } from "./screens/TelaDetalhes";
 import { NavigationContainer } from "@react-navigation/native";
 import { TabNavigation } from "./routes/TabNavigation";
 import { TelaCidade } from "./screens/TelaCidade";
@@ -12,10 +13,12 @@ import { TelaPlanos } from "./screens/TelaPlanos";
 import { TelaLogin } from './screens/TelaLogin';
 
 export default function App() {
-  return (
+  return (    
 //     <NavigationContainer>
 //       <TabNavigation />
 //     </NavigationContainer>
+    
+//     <TelaDetalhes />
     // <TelaEndereco/>
 //     <TelaCidade />
     // <TelaRegistro />
