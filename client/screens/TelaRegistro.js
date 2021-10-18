@@ -3,7 +3,7 @@ import { StyleSheet, TextInput, View, TouchableOpacity, Text } from "react-nativ
 import { ArrowBack } from "../components/ArrowBack";
 import { Ionicons } from "@expo/vector-icons";
 
-export function TelaRegistro() {
+export function TelaRegistro({ navigation }) {
     return (
         <View style={styles.container}>
             <View style={styles.content}>
@@ -25,7 +25,7 @@ export function TelaRegistro() {
                         style={styles.input}
                     />
 
-                    <TouchableOpacity style={styles.buttonInput}>
+                    <TouchableOpacity style={styles.buttonInput} onPress={() => navigation.navigate("TelaEndereco")}>
                         <Text style={styles.textButtonInput}>ENDEREÇO</Text>
                         <Ionicons name="chevron-forward" size={24} color="#757575" />
                     </TouchableOpacity>

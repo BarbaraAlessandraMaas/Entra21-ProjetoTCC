@@ -3,7 +3,7 @@ import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image, StatusBar }
 import { useFonts } from "expo-font";
 import { Checkbox } from "../components/Checkbox";
 
-export function TelaLogin() {
+export function TelaLogin({ navigation }) {
     const [cpf, setCpf] = React.useState("");
     const [senha, setSenha] = React.useState("");
     const [selecionado, setSelecionado] = React.useState(false);
@@ -40,7 +40,7 @@ export function TelaLogin() {
                         message="Mantenha-se conectado"
                         style={styles.checkbox}
                     />
-                    <TouchableOpacity style={styles.buttonEntrar}>
+                    <TouchableOpacity style={styles.buttonEntrar} onPress={() => navigation.navigate("DrawerNavigation")}>
                         <Text style={styles.textEntrar}>ENTRAR</Text>
                     </TouchableOpacity>
                 </View>
@@ -48,7 +48,7 @@ export function TelaLogin() {
 
             <View style={styles.cadastroView}>
                 <Text style={styles.textCadastro}>Não possui uma conta?</Text>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate("TelaRegistro")}>
                     <Text style={styles.textButtonCadastro}>Cadastre-se aqui</Text>
                 </TouchableOpacity>
             </View>

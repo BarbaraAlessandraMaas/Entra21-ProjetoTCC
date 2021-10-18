@@ -1,15 +1,15 @@
 import React from "react";
-import { Text, View, StyleSheet, TouchableOpacity, StatusBar } from "react-native";
+import { Text, View, StyleSheet, TouchableOpacity, StatusBar,DrawerLayoutAndroid } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-export function OptionBar(props) {
+export function OptionBar(props, { openDrawer, closeDrawer }) {
     if (!props.dados) {
         return (
             <View style={styles.container}>
                 <StatusBar barStyle="white" backgroundColor="#183557" />
 
                 <View style={styles.status}>
-                    <TouchableOpacity style={styles.menuButton}>
+                    <TouchableOpacity style={styles.menuButton} onPress={openDrawer}>
                         <Ionicons name="menu" size={27} color="white" />
                     </TouchableOpacity>
 
@@ -25,7 +25,7 @@ export function OptionBar(props) {
                 <StatusBar barStyle="white" backgroundColor="#183557" />
 
                 <View style={styles.status}>
-                    <TouchableOpacity style={styles.menuButton}>
+                    <TouchableOpacity style={styles.menuButton} onPress={openDrawer}>
                         <Ionicons name="menu" size={27} color="white" />
                     </TouchableOpacity>
 

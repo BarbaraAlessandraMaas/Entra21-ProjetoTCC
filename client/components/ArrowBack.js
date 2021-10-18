@@ -2,13 +2,13 @@ import React from "react";
 import { StyleSheet, StatusBar, View, TouchableOpacity, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-export function ArrowBack(props) {
+export function ArrowBack(props, { navigation }) {
     return (
         <View style={styles.container}>
             <StatusBar barStyle="white" backgroundColor="#183557" />
 
             <View style={styles.status}>
-                <TouchableOpacity style={styles.arrow}>
+                <TouchableOpacity style={styles.arrow} onPress={() => navigation.pop()}>
                     <Ionicons name="arrow-back" size={24} color="white" />
                 </TouchableOpacity>
                 <Text style={styles.textPlanos}>{props.text}</Text>

@@ -1,9 +1,10 @@
-import React, { useRef, useState } from "react";
-import { Modal, StyleSheet, View, Text, TouchableOpacity, DrawerLayoutAndroid, StatusBar } from "react-native";
+import React, { Children, useRef, useState } from "react";
+import { Modal, StyleSheet, View, Text, TouchableOpacity, DrawerLayoutAndroid } from "react-native";
 import { Ionicons } from '@expo/vector-icons';
 import { OptionDrawer } from "../components/OptionDrawer";
+import { DrawerContentScrollView } from "@react-navigation/drawer";
 
-export function TelaOpcoes() {
+export function TelaOpcoes({ navigation }, props) {
     const [modalOpen, setModalOpen] = useState(false);
     const drawer = useRef(null);
 
@@ -28,39 +29,57 @@ export function TelaOpcoes() {
     );
 
     return (
-        <View style={styles.container}>
-            <DrawerLayoutAndroid
-                ref={drawer}
-                drawerWidth={300}
-                drawerPosition={"left"}
-                renderNavigationView={navigationView}
-            >
-                <View style={styles.outDrawer}>
-                    <StatusBar barStyle="dark-content" backgroundColor="white" />
+        <DrawerContentScrollView {...props}>
+            <View style={styles.container}>
+                {/* <DrawerLayoutAndroid
+                    ref={drawer}
+                    drawerWidth={300}
+                    drawerPosition={"left"}
+                    renderNavigationView={navigationView}
+                >
+                    { 
+                        React.Children.map(children, child => {
+                            return React.cloneElement(child, { openDrawer: drawer.current.openDrawer, closeDrawer: drawer.current.closeDrawer });
+                        })
+                    }
+                </DrawerLayoutAndroid> */}
 
-                    <TouchableOpacity onPress={() => drawer.current.openDrawer()}>
-                        <Ionicons name="menu" size={30} color="black" />
+                <View style={styles.inDrawer}>
+                    <TouchableOpacity style={styles.buttonClose} onPress={() => navigation.closeDrawer()}>
+                        <Ionicons name="close" size={30} color="black" />
                     </TouchableOpacity>
-                </View>
-            </DrawerLayoutAndroid>
 
-            <Modal visible={modalOpen} animationType="slide">
-                <View style={styles.modalSobre}>
-                    <TouchableOpacity style={styles.arrow} onPress={() => setModalOpen(false)}>
-                        <Ionicons name="arrow-back" size={24} color="white" />
+                    <TouchableOpacity>
+                        <OptionDrawer icon="help" text="Ajuda" onPress={() => navigation.navigate("TelaAjuda")} />
+                    </TouchableOpacity>
+
+                    <TouchableOpacity onPress={() => setModalOpen(true)}>
+                        <OptionDrawer icon="document-text-outline" text="Sobre" />
                     </TouchableOpacity>
                     
-                    <View style={styles.text}>
-                        <Text style={styles.textModalTop}>
-                            Este aplicativo é um projeto desenvolvido no curso de React /React Native do Entra21, em Timbó, para o Trabalho de Conclusão de Curso (TCC).
-                        </Text>
-                        <Text style={styles.textModalBottom}>
-                            Desenvolvido pela equipe App-in Five, 2021.
-                        </Text>
-                    </View>
+                    <TouchableOpacity>
+                        <OptionDrawer icon="log-out-outline" text="Log Out" />
+                    </TouchableOpacity>
                 </View>
-            </Modal>
-        </View>
+
+                <Modal visible={modalOpen} animationType="slide">
+                    <View style={styles.modalSobre}>
+                        <TouchableOpacity style={styles.arrow} onPress={() => setModalOpen(false)}>
+                            <Ionicons name="arrow-back" size={24} color="white" />
+                        </TouchableOpacity>
+                        
+                        <View style={styles.text}>
+                            <Text style={styles.textModalTop}>
+                                Este aplicativo é um projeto desenvolvido no curso de React /React Native do Entra21, em Timbó, para o Trabalho de Conclusão de Curso (TCC).
+                            </Text>
+                            <Text style={styles.textModalBottom}>
+                                Desenvolvido pela equipe App-in Five, 2021.
+                            </Text>
+                        </View>
+                    </View>
+                </Modal>
+            </View>
+        </DrawerContentScrollView>
     );
 }
 

@@ -3,7 +3,7 @@ import { StyleSheet, TextInput, View, TouchableOpacity, Text, Modal } from "reac
 import { ArrowBack } from "../components/ArrowBack";
 import { Ionicons } from "@expo/vector-icons";
 
-export function TelaEndereco() {
+export function TelaEndereco({ navigation }) {
     const [modalOpen, setModalOpen] = useState(false);
 
     return (
@@ -32,7 +32,7 @@ export function TelaEndereco() {
                     />
                 </View>
 
-                <TouchableOpacity style={styles.buttonConfirm}>
+                <TouchableOpacity style={styles.buttonConfirm} onPress={() => navigation.goBack()}>
                     <Text style={styles.textButtonConfirm}>Confirmar</Text>
                 </TouchableOpacity>
             </View>

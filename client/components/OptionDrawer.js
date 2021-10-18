@@ -1,6 +1,6 @@
 import React from "react";
-import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
-import { Ionicons } from '@expo/vector-icons';
+import { StyleSheet, View, Text } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 export function OptionDrawer(props) {
     return (
