@@ -1,11 +1,12 @@
 import React from "react";
 import { StyleSheet, StatusBar, View, TouchableOpacity, Text } from "react-native";
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons } from "@expo/vector-icons";
 
 export function ArrowBack(props) {
     return (
         <View style={styles.container}>
             <StatusBar barStyle="white" backgroundColor="#183557" />
+
             <View style={styles.status}>
                 <TouchableOpacity style={styles.arrow}>
                     <Ionicons name="arrow-back" size={24} color="white" />
