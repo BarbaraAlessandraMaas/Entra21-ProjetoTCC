@@ -1,4 +1,6 @@
 import React from "react";
+import { TelaCidade } from "./screens/TelaCidade";
+import { TelaEndereco } from "./screens/TelaEndereco";
 import { TelaConfirmarRegistro } from "./screens/TelaConfirmarRegistro";
 import { TelaRegistro } from "./screens/TelaRegistro";
 import { TelaAjuda } from "./screens/TelaAjuda";
@@ -9,6 +11,8 @@ import { TelaLogin } from './screens/TelaLogin';
 
 export default function App() {
   return (
+    // <TelaEndereco/>
+//     <TelaCidade />
     // <TelaRegistro />
 //     <TelaConfirmarRegistro />
     // <TelaOpcoes />
