@@ -54,9 +54,9 @@ export function AuthProvider({ children }) {
     }, []);
 
     const memoContext = React.useMemo(() => ({
-        signIn: async (email, password) => {
+        signIn: async (cpf, password) => {
             try {                                                
-                const accessToken = (await api.post("/auth/login", { email, password })).data;                
+                const accessToken = (await api.post("/auth/login", { cpf, password })).data;                
 
                 await SecureStore.setItemAsync("access-token", accessToken);
                 
@@ -68,13 +68,13 @@ export function AuthProvider({ children }) {
                 throw err;                           
             }            
         },
-        signUp: async (user) => {
+        signUp: async (cliente) => {
             try {                                                        
-                await api.post("/users", { ...user });                                                                                
+                await api.post("/clientes", { ...cliente });                                                                                
             } catch (err) {
                 console.log(err);
                 throw err;                           
-            }         
+            }
         },
         signOut: () => {
             try {

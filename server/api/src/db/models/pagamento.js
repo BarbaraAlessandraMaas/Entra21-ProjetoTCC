@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     vencimento: {
       type: DataTypes.DATE,
       allowNull: false
-    }
+    },
   }, {
     sequelize,
     modelName: 'Pagamento',

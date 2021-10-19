@@ -15,10 +15,8 @@ app.use("/api/clientes", require("./routes/clientesRoutes"));
 app.use("/api/auth", require("./routes/authRoutes"));
 
 
-
 // Definindo o middleware de tratamento de erros
 app.use(require("./middlewares/authmiddleware"));
 app.use(require("./middlewares/errorHandlerMiddleware"));
-
 
 app.listen(PORT, () => console.log("O servidor está rodando na porta: " + PORT))

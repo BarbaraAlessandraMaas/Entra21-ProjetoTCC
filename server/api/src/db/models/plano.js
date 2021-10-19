@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
     descricao:  {
       type: DataTypes.STRING,
       allowNull: false
-    }
+    },
   }, {
     sequelize,
     modelName: 'Plano',

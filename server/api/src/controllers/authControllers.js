@@ -9,12 +9,12 @@ function createAccessToken(clienteId) {
 }
 
 async function login(req, res, next) {
-    const { email, password } = req.body;
+    const { cpf, password } = req.body;
 
     const err = new createHttpError(400, "E-mail ou senha inválidos");
 
     try {
-        const cliente = await Cliente.findOne({ where: { email } });
+        const cliente = await Cliente.findOne({ where: { cpf } });
 
         if (!cliente) {
             throw err;
@@ -34,5 +34,6 @@ async function login(req, res, next) {
 }
 
 module.exports = {
-    login
+    login,
+    createAccessToken
 };
