@@ -1,4 +1,5 @@
 import React from "react";
+import { TelaChat } from "./screens/TelaChat";
 import { TelaDetalhes } from "./screens/TelaDetalhes";
 import { NavigationContainer } from "@react-navigation/native";
 import { TabNavigation } from "./routes/TabNavigation";
@@ -16,10 +17,11 @@ import { StackScreen } from "./routes/StackScreen";
 export default function App() {
   return (    
     <StackScreen />
-
     // <NavigationContainer>
     //   <TabNavigation />
     // </NavigationContainer>
+    
+    <StackScreen />
     
     // <TelaDetalhes />
     // <TelaEndereco/>
@@ -31,5 +33,6 @@ export default function App() {
     // <TelaTopico />
     // <TelaPlanos />
     // <TelaLogin />
+    // <TelaChat />
   );
 }
