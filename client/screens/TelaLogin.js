@@ -1,17 +1,58 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image, StatusBar } from "react-native";
 import { useFonts } from "expo-font";
 import { Checkbox } from "../components/Checkbox";
+import { useAuth } from "../contexts/AuthContext";
+import { TelaLoading } from "../components/TelaLoading";
+import { showErrorMessage } from "../utils/errorHandlers";
+import { handleCpfChange, handlePasswordChange } from "../utils/commonValidations";
+
+const initialState = {
+    cpf: "",
+    isCpfValid: false,
+    password: "",
+    isPasswordValid: false,
+    isLoginValid: false,
+    isLoading: false,
+}
 
 export function TelaLogin({ navigation }) {
-    const [cpf, setCpf] = React.useState("");
-    const [senha, setSenha] = React.useState("");
-    const [selecionado, setSelecionado] = React.useState(false);
+    const [selecionado, setSelecionado] = useState(false);
+    const { memoContext } = useAuth();
+    const [state, setState] = useState(initialState);
+
+    useEffect(() => {
+        setState(prevState => ({
+            ...prevState,
+            isLoginValid: prevState.isCpfValid && prevState.isPasswordValid
+        }));
+    }, [state.isCpfValid, state.isPasswordValid]);
+
+    async function handleSignIn() {
+        setState(prevState => ({ ...prevState, isLoading: true }));
+        try {
+            await memoContext.signIn(state.email, state.password);
+        } catch (err) {
+            setState(prevState => ({
+                ...prevState,
+                isLoading: false,
+                emailError: true,
+                passwordError: true
+            }));
+            showErrorMessage(err);
+        }
+    }
+
+    function handleNavigateSignUpScreen() {
+        setState(initialState);
+        navigation.push("TelaCadastro");
+    }
 
     useFonts({ "Roboto": require("../assets/Roboto-Regular.ttf") });
 
     return (
         <View style={styles.container}>
+            <TelaLoading isVisible={state.isLoading} />
             <StatusBar color="white" backgroundColor="#183557" />
 
             <View style={styles.loginView}>
@@ -23,23 +64,26 @@ export function TelaLogin({ navigation }) {
                 <View style={styles.form}>
                     <TextInput
                         placeholder="CPF"
-                        onChangeText={setCpf}
+                        onChangeText={text => handleCpfChange(text, setState)}
                         style={styles.input}
-                        value={cpf}
+                        value={state.cpf}
                         keyboardType="numeric"
+                        isValid={state.isCpfValid}
                     />
                     <TextInput
-                        onChangeText={setSenha}
                         placeholder="SENHA"
-                        value={senha}
+                        onChangeText={text => handlePasswordChange(text, setState)}
+                        value={state.password}
                         style={styles.input}
+                        secureTextEntry={true}
+                        isValid={state.isPasswordValid}
                     />
                     <Checkbox
                         checked={selecionado}
                         onPress={() => setSelecionado(prevSelecionado => !prevSelecionado)}
                         message="Mantenha-se conectado"
                     />
-                    <TouchableOpacity style={styles.buttonEntrar}>
+                    <TouchableOpacity style={styles.buttonEntrar} onPress={handleSignIn} disabled={!state.isLoginValid}>
                         <Text style={styles.textEntrar}>ENTRAR</Text>
                     </TouchableOpacity>
                 </View>
@@ -48,7 +92,7 @@ export function TelaLogin({ navigation }) {
             <View style={styles.cadastroView}>
                 <Text style={styles.textCadastro}>Não possui uma conta?</Text>
                 <TouchableOpacity>
-                    <Text style={styles.textButtonCadastro} onPress={() => navigation.navigate("TelaRegistro")}>Cadastre-se aqui</Text>
+                    <Text style={styles.textButtonCadastro} onPress={handleNavigateSignUpScreen}>Cadastre-se aqui</Text>
                 </TouchableOpacity>
             </View>
         </View>

@@ -2,38 +2,108 @@ import React, { useState } from "react";
 import { StyleSheet, TextInput, View, TouchableOpacity, Text, ScrollView } from "react-native"
 import { ArrowBack } from "../components/ArrowBack";
 import { Ionicons } from "@expo/vector-icons";
-import { HelperText } from "react-native-paper";
+import { handleCpfChange } from "../utils/commonValidations";
+import { TelaLoading } from "../components/TelaLoading";
+
+export const initialState = {
+    name: "",
+    isNameValid: false,
+    cpf: "",
+    isCpfValid: false,
+    phoneNumber: "",    
+    isPhoneNumberValid: false,
+    isRegisterNextStep: false,
+    email: "",
+    isEmailValid: false,
+    password: "",    
+    isPasswordValid: false,
+    confirmPassword: "",
+    isConfirmPasswordValid: false,
+    isRegisterValid: false,
+    isLoading: false
+}
 
 export function TelaRegistro({ navigation }) {
-    const [nome, setNome] = React.useState("");
-    const [cpf, setCpf] = React.useState("");
-    const [celular, setCelular] = React.useState("");
+    const [state, setState] = useState(initialState);
+
+    useEffect(() => {        
+        const validations = [ 
+            state.isNameValid,
+            state.isCpfValid,
+            state.isPhoneNumberValid
+        ];
+
+        const isRegisterNextStep = validations.reduce((previousValue, currentValue) => previousValue && currentValue);
+
+        setState(prevState => ({
+            ...prevState, 
+            isRegisterNextStep: isRegisterNextStep
+        }));
+    }, [state.isNameValid, state.isCpfValid, state.isPhoneNumberValid]);
+
+    function handleNameChange(text) {
+        if (text.trim().length >= 4) {
+            setState(prevState => ({
+                ...prevState, 
+                name: text, 
+                isNameValid: true 
+            }));
+        } else {
+            setState(prevState => ({
+                ...prevState, 
+                name: text, 
+                isNameValid: false 
+            }));
+        }
+    }
+
+    function handlePhoneNumberChange(text) {
+        if (text.trim() <= 11) {
+            setState(prevState => ({
+                ...prevState, 
+                phoneNumber: text, 
+                isPhoneNumberValid: true 
+            }));
+        } else {
+            setState(prevState => ({
+                ...prevState, 
+                phoneNumber: text, 
+                isPhoneNumberValid: false
+            }));
+        }
+    }
 
     return (
         <View style={styles.container}>
+            <TelaLoading isVisible={state.isLoading} />
             <View style={styles.content}>
                 <ArrowBack text="REGISTRO" />
 
                 <ScrollView style={styles.form}>
                     <TextInput
-                        onChangeText={setNome}
+                        onChangeText={text => handleNameChange(text)}
+                        isValid={state.isNameValid}
                         value={nome}
                         placeholder="NOME"
                         style={styles.inputTop}
                     />
 
                     <TextInput
-                        onChangeText={setCpf}
+                        onChangeText={text => handleCpfChange(text, setState)}
+                        isValid={state.isCpfValid}
                         value={cpf}
                         placeholder="CPF"
                         style={styles.input}
+                        keyboardType="numeric"
                     />
 
                     <TextInput
-                        onChangeText={setCelular}
+                        onChangeText={text => handlePhoneNumberChange(text)}
+                        isValid={state.isPhoneNumberValid}
                         value={celular}
                         placeholder="CELULAR"
                         style={styles.input}
+                        keyboardType="phone-pad"
                     />
 
                     <TouchableOpacity style={styles.buttonInput} onPress={() => navigation.navigate("TelaEndereco")}>
@@ -43,7 +113,7 @@ export function TelaRegistro({ navigation }) {
                 </ScrollView>
 
                 <View style={{ marginBottom: 50 }}>
-                    <TouchableOpacity style={styles.buttonNext}>
+                    <TouchableOpacity style={styles.buttonNext} onPress={() => navigation.navigate("TelaConfirmarRegistro")} disabled={!state.isRegisterNextStep}>
                         <Text style={styles.textButtonNext}>Próximo</Text>
                     </TouchableOpacity>
                 </View>

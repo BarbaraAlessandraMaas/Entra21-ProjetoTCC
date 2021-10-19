@@ -13,7 +13,7 @@ import { TelaTopico } from "./screens/TelaTopico";
 import { TelaPlanos } from "./screens/TelaPlanos";
 import { TelaLogin } from './screens/TelaLogin';
 import { StackScreen } from "./routes/StackScreen";
-import { TelaLoading } from "./screens/TelaLoading";
+import { TelaLoading } from "./components/TelaLoading";
 
 export default function App() {
   return (    
