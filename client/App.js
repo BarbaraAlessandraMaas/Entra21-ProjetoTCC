@@ -13,6 +13,7 @@ import { TelaTopico } from "./screens/TelaTopico";
 import { TelaPlanos } from "./screens/TelaPlanos";
 import { TelaLogin } from './screens/TelaLogin';
 import { StackScreen } from "./routes/StackScreen";
+import { TelaLoading } from "./screens/TelaLoading";
 
 export default function App() {
   return (    
@@ -21,8 +22,7 @@ export default function App() {
     //   <TabNavigation />
     // </NavigationContainer>
     
-    <StackScreen />
-    
+    // <TelaLoading />
     // <TelaDetalhes />
     // <TelaEndereco/>
     // <TelaCidade />

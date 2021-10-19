@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, TextInput, View, TouchableOpacity, Text, ScrollView } from "react-native"
 import { ArrowBack } from "../components/ArrowBack";
 import { Ionicons } from "@expo/vector-icons";
+import { HelperText } from "react-native-paper";
 
 export function TelaRegistro({ navigation }) {
     const [nome, setNome] = React.useState("");
@@ -18,7 +19,7 @@ export function TelaRegistro({ navigation }) {
                         onChangeText={setNome}
                         value={nome}
                         placeholder="NOME"
-                        style={styles.input}
+                        style={styles.inputTop}
                     />
 
                     <TextInput
@@ -65,12 +66,18 @@ const styles = StyleSheet.create({
         marginTop: 80,
         paddingBottom: 150
     },
+    inputTop: {
+        height: 55,
+        fontSize: 18,
+        paddingLeft: 15,
+        backgroundColor: "white"
+    },
     input: {
         height: 55,
         fontSize: 18,
         paddingLeft: 15,
-        marginBottom: 40,
-        backgroundColor: "white"
+        backgroundColor: "white",
+        marginTop: 40
     },
     buttonInput: {
         backgroundColor: "white",
@@ -80,7 +87,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         height: 55,
         alignItems: "center",
-        borderRadius: 5
+        borderRadius: 5,
+        marginTop: 40
     },
     textButtonInput: {
         fontSize: 18,
