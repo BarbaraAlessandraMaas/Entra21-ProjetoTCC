@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import { StyleSheet, TextInput, View, TouchableOpacity, Text, Modal } from "react-native";
+import { StyleSheet, TextInput, View, TouchableOpacity, Text, Modal, ScrollView } from "react-native";
 import { ArrowBack } from "../components/ArrowBack";
 import { Ionicons } from "@expo/vector-icons";
 
 export function TelaEndereco({ navigation }) {
+    const [logradouro, setLogradouro] = React.useState("");
+    const [bairro, setBairro] = React.useState("");
+    const [complemento, setComplemento] = React.useState("");
     const [modalOpen, setModalOpen] = useState(false);
 
     return (
@@ -11,12 +14,16 @@ export function TelaEndereco({ navigation }) {
             <View style={styles.content}>
                 <ArrowBack text="ENDEREÇO" />
 
-                <View style={styles.form}>
+                <ScrollView style={styles.form}>
                     <TextInput
+                        onChangeText={setLogradouro}
+                        value={logradouro}
                         placeholder="LOGRADOURO"
                         style={styles.input}
                     />
                     <TextInput
+                        onChangeText={setBairro}
+                        value={bairro}
                         placeholder="BAIRRO"
                         style={styles.input}
                     />
@@ -27,14 +34,18 @@ export function TelaEndereco({ navigation }) {
                     </TouchableOpacity>
 
                     <TextInput
+                        onChangeText={setComplemento}
+                        value={complemento}
                         placeholder="COMPLEMENTO"
                         style={styles.input}
                     />
-                </View>
+                </ScrollView>
 
-                <TouchableOpacity style={styles.buttonConfirm} onPress={() => navigation.goBack()}>
-                    <Text style={styles.textButtonConfirm}>Confirmar</Text>
-                </TouchableOpacity>
+                <View style={{ marginBottom: 50 }}>
+                    <TouchableOpacity style={styles.buttonConfirm}>
+                        <Text style={styles.textButtonConfirm}>Confirmar</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
 
             <Modal visible={modalOpen} animationType="slide">
@@ -53,7 +64,7 @@ export function TelaEndereco({ navigation }) {
 
                     </View>
                     <TouchableOpacity>
-                        <Text style={styles.textDown}>Não encontrou sua cidade?</Text>
+                        <Text style={styles.textDown} onPress={() => navigation.navigate("TelaCidade")}>Não encontrou sua cidade?</Text>
                     </TouchableOpacity>
                 </View>
             </Modal>
@@ -66,18 +77,20 @@ const styles = StyleSheet.create({
         flex: 1
     },
     content: {
-        backgroundColor: "#EAEAEA",
+        backgroundColor: "#183557",
         height: "100%"
     },
     form: {
+        flex: 1,
         marginHorizontal: 40,
-        marginTop: 100
+        marginTop: 80,
+        paddingBottom: 150
     },
     input: {
         height: 55,
         fontSize: 18,
         paddingLeft: 15,
-        marginBottom: 50,
+        marginBottom: 40,
         backgroundColor: "white"
     },
     buttonInput: {
@@ -98,12 +111,13 @@ const styles = StyleSheet.create({
     buttonConfirm: {
         backgroundColor: "#36B8B8",
         paddingHorizontal: 20,
-        marginVertical: 50,
         height: 55,
         alignItems: "center",
         justifyContent: "center",
-        marginHorizontal: 40,
-        borderRadius: 5
+        marginHorizontal: 90,
+        borderRadius: 5,
+        marginTop: 20,
+        marginBottom: 3
     },
     textButtonConfirm: {
         fontSize: 18,

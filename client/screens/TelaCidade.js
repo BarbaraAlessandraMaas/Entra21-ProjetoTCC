@@ -5,7 +5,7 @@ import { ArrowBack } from "../components/ArrowBack";
 export function TelaCidade() {
     return (
         <View style={styles.container}>
-            <ArrowBack text="Voltar" />
+            <ArrowBack text="PLANO INDISPONÍVEL" />
 
             <View style={styles.content}>
                 <Text style={styles.textContent}>

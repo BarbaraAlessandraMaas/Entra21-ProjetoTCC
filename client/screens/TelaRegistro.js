@@ -1,26 +1,37 @@
-import React from "react";
-import { StyleSheet, TextInput, View, TouchableOpacity, Text } from "react-native"
+import React, { useState } from "react";
+import { StyleSheet, TextInput, View, TouchableOpacity, Text, ScrollView } from "react-native"
 import { ArrowBack } from "../components/ArrowBack";
 import { Ionicons } from "@expo/vector-icons";
+import { HelperText } from "react-native-paper";
 
 export function TelaRegistro({ navigation }) {
+    const [nome, setNome] = React.useState("");
+    const [cpf, setCpf] = React.useState("");
+    const [celular, setCelular] = React.useState("");
+
     return (
         <View style={styles.container}>
             <View style={styles.content}>
                 <ArrowBack text="REGISTRO" />
 
-                <View style={styles.form}>
+                <ScrollView style={styles.form}>
                     <TextInput
+                        onChangeText={setNome}
+                        value={nome}
                         placeholder="NOME"
-                        style={styles.input}
+                        style={styles.inputTop}
                     />
 
                     <TextInput
+                        onChangeText={setCpf}
+                        value={cpf}
                         placeholder="CPF"
                         style={styles.input}
                     />
 
                     <TextInput
+                        onChangeText={setCelular}
+                        value={celular}
                         placeholder="CELULAR"
                         style={styles.input}
                     />
@@ -29,11 +40,13 @@ export function TelaRegistro({ navigation }) {
                         <Text style={styles.textButtonInput}>ENDEREÇO</Text>
                         <Ionicons name="chevron-forward" size={24} color="#757575" />
                     </TouchableOpacity>
-                </View>
+                </ScrollView>
 
-                <TouchableOpacity style={styles.buttonNext}>
-                    <Text style={styles.textButtonNext}>Próximo</Text>
-                </TouchableOpacity>
+                <View style={{ marginBottom: 50 }}>
+                    <TouchableOpacity style={styles.buttonNext}>
+                        <Text style={styles.textButtonNext}>Próximo</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         </View>
     );
@@ -50,14 +63,21 @@ const styles = StyleSheet.create({
     form: {
         flex: 1,
         marginHorizontal: 40,
-        marginTop: 80
+        marginTop: 80,
+        paddingBottom: 150
+    },
+    inputTop: {
+        height: 55,
+        fontSize: 18,
+        paddingLeft: 15,
+        backgroundColor: "white"
     },
     input: {
         height: 55,
         fontSize: 18,
         paddingLeft: 15,
-        marginBottom: 50,
-        backgroundColor: "white"
+        backgroundColor: "white",
+        marginTop: 40
     },
     buttonInput: {
         backgroundColor: "white",
@@ -65,10 +85,10 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         paddingHorizontal: 20,
-        marginBottom: 50,
         height: 55,
         alignItems: "center",
-        borderRadius: 5
+        borderRadius: 5,
+        marginTop: 40
     },
     textButtonInput: {
         fontSize: 18,
@@ -77,12 +97,13 @@ const styles = StyleSheet.create({
     buttonNext: {
         backgroundColor: "#36B8B8",
         paddingHorizontal: 20,
-        marginVertical: 50,
         height: 55,
         alignItems: "center",
         justifyContent: "center",
         marginHorizontal: 90,
-        borderRadius: 5
+        borderRadius: 5,
+        marginTop: 20,
+        marginBottom: 3
     },
     textButtonNext: {
         fontSize: 18,

@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
     complemento:{
       type: DataTypes.STRING,
       allowNull: false
-    },
+    }
   }, {
     sequelize,
     modelName: 'Endereco',
