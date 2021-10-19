@@ -1,11 +1,10 @@
 {
-  "name": "server",
+  "name": "api-exus",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js",
-    "start": "node"
+    "dev": "nodemon src/index.js"
   },
   "keywords": [],
   "author": "",
@@ -21,7 +20,7 @@
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.7.0",
     "sequelize-cli": "^6.2.0",
-    "socket.io": "^4.3.0"
+    "socket.io": "^4.3.1"
   },
   "devDependencies": {
     "morgan": "^1.10.0",

@@ -1,31 +1,30 @@
 'use strict';
-const { Model } = require('sequelize');
-
+const {
+  Model
+} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Plano extends Model {
+    
     static associate(models) {
-      this.hasMany(models.Pagamento, { foreignKey: "cd_plano"});
+      this.hasMany(models.Pagamento, { foreignKey: "plano_id"});
     }
   };
   Plano.init({
-    cd_plano: {
-      type: DataTypes.UUID,
-      primaryKey: true,
-      defaultValue: DataTypes.UUIDV4
-    },
-    nm_plano: {
-      type: DataTypes.STRING
-    },
-    ds_velocidade: {
+    plano:  {
       type: DataTypes.STRING,
       allowNull: false
     },
-    vl_plano: {
-      type: DataTypes.DECIMAL,
+    velocidade:  {
+      type: DataTypes.STRING,
       allowNull: false
     },
-    ds_plano: {
-      type: DataTypes.STRING
+    valor:  {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    descricao:  {
+      type: DataTypes.STRING,
+      allowNull: false
     }
   }, {
     sequelize,

@@ -1,68 +1,60 @@
 'use strict';
-const { Model } = require('sequelize');
+const {
+  Model
+} = require('sequelize');
 const bcrypt = require("bcrypt");
-
 module.exports = (sequelize, DataTypes) => {
-  class Cliente extends Model {
+  class Cliente extends Model {    
     static associate(models) {
-      this.belongsToMany(models.Chat, { through: "clientes_chats", as: "chats" })
-      this.hasOne(models.Endereco, { foreignKey: "cd_cliente" });
-      this.hasMany(models.Pagamento, { foreignKey: "cd_cliente" });
-      this.belongsToMany(models.Funcionario, { through: "assistencia", foreignKey: "cd_cliente" });
-      this.belongsTo(models.Message, { foreignKey: "cd_cliente" });
+      this.hasOne(models.Endereco, { foreignKey: "cliente_id" });
+      this.hasMany(models.Pagamento, { foreignKey: "cliente_id" });
+      this.belongsToMany(models.Chat, { through: "clientes_chats", as: "chats" });
+      this.hasMany(models.Mensagem, { foreignKey: "cliente_id" });
     }
 
-    isPasswordValid(ds_senha) {
-      return bcrypt.compareSync(ds_senha, this.ds_senha);
+    isPasswordValid(password) {
+      return bcrypt.compareSync(password, this.password);
     }
 
-      toJSON() {
-    return {
-      ...this.get(),
-      ds_senha: undefined
+    toJSON() {
+      return {
+        ...this.get(),
+        password: undefined
+      }
     }
-  }
-};
-Cliente.init({
-  cd_cliente: {
-    type: DataTypes.UUID,
-    primaryKey: true,
-    defaultValue: DataTypes.UUIDV4
-  },
-  nm_cliente: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  nr_cpf: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: true
-  },
-  ds_senha: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    validate: {
-      notNull: { args: true, msg: "You must enter a password" }
+  };
+  Cliente.init({
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false
     },
-    set(ds_senha) {
-      this.setDataValue("ds_senha", bcrypt.hashSync(ds_senha, 10));
-    }
-  },
-  nr_telefone: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  ds_email: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: true,
-    validate: {
-      isEmail: { msg: "E-mail Inválido!" }
-    }
-  }
-}, {
-  sequelize,
-  modelName: 'Cliente',
-});
-return Cliente;
-};
+    cpf: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      set(password) {
+        this.setDataValue("password", bcrypt.genSaltSync(10));
+      }
+    },
+    phone:  {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        isEmail: { msg: "Invalid e-mail"}        
+      }
+    },
+  },  
+  {
+    sequelize,
+    modelName: 'Cliente',
+  });
+  return Cliente;
