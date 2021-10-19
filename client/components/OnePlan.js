@@ -82,7 +82,7 @@ const pagamento = [
     }
 ]
 
-export function OnePlan({ navigation }) {
+export function OnePlan() {
     const mostrarPlano = ({ item }) => {
         const StatusColor = () => {
             if (item.ds_status === "Pago") {
@@ -106,7 +106,7 @@ export function OnePlan({ navigation }) {
                     <StatusColor />
                 </View>
 
-                <TouchableOpacity style={styles.buttonDetails} onPress={() => navigation.navigate("TelaDetalhes")}>
+                <TouchableOpacity style={styles.buttonDetails}>
                     <Text style={{ color: "#333333" }}>Detalhes</Text>
                     <Ionicons name="chevron-forward" size={24} color="#333333" />
                 </TouchableOpacity>

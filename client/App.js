@@ -10,11 +10,13 @@ import { TelaAjuda } from "./screens/TelaAjuda";
 import { TelaOpcoes } from "./screens/TelaOpcoes";
 import { TelaTopico } from "./screens/TelaTopico";
 import { TelaPlanos } from "./screens/TelaPlanos";
-import { TelaLogin } from "./screens/TelaLogin";
+import { TelaLogin } from './screens/TelaLogin';
 import { StackScreen } from "./routes/StackScreen";
 
 export default function App() {
   return (    
+    <StackScreen />
+
     // <NavigationContainer>
     //   <TabNavigation />
     // </NavigationContainer>
@@ -23,7 +25,6 @@ export default function App() {
     // <TelaEndereco/>
     // <TelaCidade />
     // <TelaRegistro />
-    <StackScreen />
     // <TelaConfirmarRegistro />
     // <TelaOpcoes />
     // <TelaAjuda />

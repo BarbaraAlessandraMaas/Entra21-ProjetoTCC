@@ -1,9 +1,8 @@
 import React from "react";
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons } from '@expo/vector-icons';
 import { OptionBar } from "../components/OptionBar";
 import { plano } from "../components/OnePlan";
-import { TelaOpcoes } from "./TelaOpcoes";
 
 export const user = {
     cd_cliente: 1,
@@ -30,9 +29,7 @@ const mostrarPlanos = ({ item }) => {
 export function TelaInicio({ navigation }) {
     return (
         <View style={styles.container}>
-            <TelaOpcoes>
-                <OptionBar nome="Bem vindo," dados={user.ds_nome} />
-            </TelaOpcoes>
+            <OptionBar nome="Bem vindo," dados={user.ds_nome} />
 
             <View style={styles.content}>
                 <View style={styles.containerDestaques}>
@@ -47,7 +44,7 @@ export function TelaInicio({ navigation }) {
                 </View>
 
                 <View style={styles.containerAllPlans}>
-                    <TouchableOpacity onPress={() => navigation.navigate("TelaPlanos")}>
+                    <TouchableOpacity>
                         <Text style={styles.textButton}>Veja todo os planos{"\n"}disponíveis aqui</Text>
                     </TouchableOpacity>
                 </View>

@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image, StatusBar } from "react-native";
+import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image, StatusBar, ScrollView } from "react-native";
 import { useFonts } from "expo-font";
 import { Checkbox } from "../components/Checkbox";
 
@@ -38,9 +38,8 @@ export function TelaLogin({ navigation }) {
                         checked={selecionado}
                         onPress={() => setSelecionado(prevSelecionado => !prevSelecionado)}
                         message="Mantenha-se conectado"
-                        style={styles.checkbox}
                     />
-                    <TouchableOpacity style={styles.buttonEntrar} onPress={() => navigation.navigate("DrawerNavigation")}>
+                    <TouchableOpacity style={styles.buttonEntrar}>
                         <Text style={styles.textEntrar}>ENTRAR</Text>
                     </TouchableOpacity>
                 </View>
@@ -48,8 +47,8 @@ export function TelaLogin({ navigation }) {
 
             <View style={styles.cadastroView}>
                 <Text style={styles.textCadastro}>Não possui uma conta?</Text>
-                <TouchableOpacity onPress={() => navigation.navigate("TelaRegistro")}>
-                    <Text style={styles.textButtonCadastro}>Cadastre-se aqui</Text>
+                <TouchableOpacity>
+                    <Text style={styles.textButtonCadastro} onPress={() => navigation.navigate("TelaRegistro")}>Cadastre-se aqui</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -66,7 +65,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         alignItems: "center",
         flex: 1,
-        paddingTop: StatusBar.currentHeight,
+        marginBottom: 10
     },
     image: {
         width: 130,
@@ -82,14 +81,15 @@ const styles = StyleSheet.create({
     form: {
         flex: 1,
         justifyContent: "center",
-        paddingTop: StatusBar.currentHeight
+        marginTop: 90
     },
     loginView: {
-        flex: 7,
+        flex: 8,
         backgroundColor: "#183557",
         borderBottomLeftRadius: 20,
         borderBottomRightRadius: 20,
-        paddingVertical: 50,
+        paddingTop: 50,
+        paddingBottom: 70,
         paddingHorizontal: 50
     },
     input: {
@@ -105,7 +105,8 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         backgroundColor: "#36B8B8",
         textAlign: "center",
-        alignSelf: "center"
+        alignSelf: "center",
+        marginBottom: 35
     },
     textEntrar: {
         fontFamily: "Roboto",
