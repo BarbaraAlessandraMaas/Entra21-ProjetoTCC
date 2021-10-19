@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image, StatusBar, ScrollView } from "react-native";
+import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image, StatusBar } from "react-native";
 import { useFonts } from "expo-font";
 import { Checkbox } from "../components/Checkbox";
 
