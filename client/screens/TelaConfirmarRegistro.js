@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, StyleSheet, StatusBar, TextInput, TouchableOpacity, Text, Modal } from "react-native";
 import { useAuth } from "../contexts/AuthContext";
 import { showErrorMessage } from "../utils/errorHandlers";
@@ -14,8 +14,6 @@ export function TelaConfirmarRegistro({ navigation }) {
 
         useEffect(() => {
             const validations = [
-                state.isNameValid,
-                state.isCpfValid,
                 state.isEmailValid,
                 state.isPasswordValid,
                 state.isConfirmPasswordValid
@@ -27,12 +25,10 @@ export function TelaConfirmarRegistro({ navigation }) {
                 ...prevState,
                 isRegisterValid: isRegisterValid
             }));
-        }, [state.isNameValid, state.isEmailValid, state.isPasswordValid, state.isConfirmPasswordValid]);
+        }, [ state.isEmailValid, state.isPasswordValid, state.isConfirmPasswordValid]);
 
         try {
             const cliente = {
-                name: initialState.name,
-                cpf: initialState.cpf,
                 phoneNumber: initialState.phoneNumber,
                 email: initialState.email,
                 password: initialState.password

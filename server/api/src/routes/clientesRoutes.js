@@ -7,9 +7,11 @@ const clientesControllers = require("../controllers/clientesControllers")
 router.post("/", clientesControllers.createCliente);
 
 // Obter um cliente
-router.get("/:id", authMiddleware, clientesControllers.getCliente);
+// router.get("/:id", authMiddleware, clientesControllers.getCliente);
 
 // Editar um cliente
 router.put("/:id", clientesControllers.updateCliente);
+
+router.get("/", clientesControllers.getClientes);
 
 module.exports = router;

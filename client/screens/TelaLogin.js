@@ -6,7 +6,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { TelaLoading } from "../components/TelaLoading";
 import { showErrorMessage } from "../utils/errorHandlers";
 import { handleCpfChange, handlePasswordChange } from "../utils/commonValidations";
-import MaskInput, { Masks } from "react-native-mask-input";
+// import MaskInput, { Masks } from "react-native-mask-input";
 
 const initialState = {
     cpf: "",
@@ -21,6 +21,7 @@ export function TelaLogin({ navigation }) {
     const [selecionado, setSelecionado] = useState(false);
     const { memoContext } = useAuth();
     const [state, setState] = useState(initialState);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         setState(prevState => ({
@@ -29,24 +30,37 @@ export function TelaLogin({ navigation }) {
         }));
     }, [state.isCpfValid, state.isPasswordValid]);
 
+    console.log(state.isCpfValid);
+    console.log(state.isPasswordValid);
+
     async function handleSignIn() {
-        setState(prevState => ({ ...prevState, isLoading: true }));
-        try {
-            await memoContext.signIn(state.cpf, state.password);
-        } catch (err) {
-            setState(prevState => ({
-                ...prevState,
-                isLoading: false,
-                cpfError: true,
-                passwordError: true
-            }));
-            showErrorMessage(err);
+        if (!state.cpf.trim() || !state.password.trim()) {
+            Alert.alert("Preencha os campos adequadamente!");
         }
+
+        setIsLoading(true);
+
+        try {
+            await memoContext.signIn(cpf, password);
+        } catch (error) {
+            Alert.alert("Não foi possível realizar login.");
+            showErrorMessage(error)
+            setIsLoading(false);
+        }
+    }
+
+    if (isLoading) {
+        return <TelaLoading />
     }
 
     function handleNavigateSignUpScreen() {
         setState(initialState);
         navigation.push("TelaRegistro");
+    }
+
+    function handleNavigateInitialScreen() {
+        setState(initialState);
+        navigation.push("TabNavigation");
     }
 
     useFonts({ "Roboto": require("../assets/Roboto-Regular.ttf") });
@@ -63,10 +77,10 @@ export function TelaLogin({ navigation }) {
                 </View>
 
                 <View style={styles.form}>
-                    <MaskInput
-                        mask={Masks.BRL_CPF}
+                    <TextInput
+                        // mask={Masks.BRL_CPF}
                         onChangeText={text => handleCpfChange(text, setState)}
-                        isValid={state.isCpfValid}
+                        isValid={true}
                         value={state.cpf}
                         placeholder="CPF"
                         style={styles.input}
@@ -85,7 +99,7 @@ export function TelaLogin({ navigation }) {
                         onPress={() => setSelecionado(prevSelecionado => !prevSelecionado)}
                         message="Mantenha-se conectado"
                     />
-                    <TouchableOpacity style={styles.buttonEntrar} onPress={handleSignIn} disabled={!state.isLoginValid}>
+                    <TouchableOpacity style={styles.buttonEntrar} onPress={navigation.navigate("TabNavigation")}>
                         <Text style={styles.textEntrar}>ENTRAR</Text>
                     </TouchableOpacity>
                 </View>

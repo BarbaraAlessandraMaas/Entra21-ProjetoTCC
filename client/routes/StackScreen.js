@@ -6,6 +6,7 @@ import { TelaRegistro } from "../screens/TelaRegistro";
 import { TelaEndereco } from "../screens/TelaEndereco";
 import { TelaCidade } from "../screens/TelaCidade";
 import { TelaConfirmarRegistro } from "../screens/TelaConfirmarRegistro";
+import { TabNavigation } from "../routes/TabNavigation";
 
 const Stack = createStackNavigator();
 
@@ -18,6 +19,7 @@ export function StackScreen() {
                 <Stack.Screen name="TelaEndereco" component={TelaEndereco} options={{ headerShown: false }} />
                 <Stack.Screen name="TelaCidade" component={TelaCidade} options={{ headerShown: false }} />
                 <Stack.Screen name="TelaConfirmarRegistro" component={TelaConfirmarRegistro} options={{ headerShown: false }} />
+                <Stack.Screen name="TabNavigation" component={TabNavigation} options={{ headerShown: false }} />
             </Stack.Navigator>
         </NavigationContainer>
     );

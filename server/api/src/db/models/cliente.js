@@ -1,10 +1,9 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 const bcrypt = require("bcrypt");
+
 module.exports = (sequelize, DataTypes) => {
-  class Cliente extends Model {    
+  class Cliente extends Model {
     static associate(models) {
       this.hasOne(models.Endereco, { foreignKey: "cliente_id" });
       this.hasMany(models.Pagamento, { foreignKey: "cliente_id" });
@@ -13,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     }
 
     isPasswordValid(password) {
-      return bcrypt.compareSync(password, this.password);
+      return password === this.password;
     }
 
     toJSON() {
@@ -35,12 +34,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false,
-      set(password) {
-        this.setDataValue("password", bcrypt.genSaltSync(10));
-      }
+      allowNull: false
     },
-    phone:  {
+    phone: {
       type: DataTypes.STRING,
       allowNull: false
     },
@@ -49,13 +45,13 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: true,
       validate: {
-        isEmail: { msg: "Invalid e-mail"}        
+        isEmail: { msg: "E-mail inválido!" }
       }
     },
-  },  
-  {
-    sequelize,
-    modelName: 'Cliente',
-  });
+  },
+    {
+      sequelize,
+      modelName: "Cliente",
+    });
   return Cliente;
 };

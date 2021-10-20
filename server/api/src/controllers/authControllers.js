@@ -11,20 +11,27 @@ function createAccessToken(clienteId) {
 async function login(req, res, next) {
     const { cpf, password } = req.body;
 
-    const err = new createHttpError(400, "E-mail ou senha inválidos");
+    const err = new createHttpError(400, "Cpf ou senha inválidos");
 
     try {
-        const cliente = await Cliente.findOne({ where: { cpf } });
+        const clienteRegistrado = await Cliente.findOne({ where: { cpf } });
 
-        if (!cliente) {
+        // console.log(clienteRegistrado);
+
+        if (!clienteRegistrado) {
             throw err;
         }
 
-        if (!cliente.isPasswordValid(password)) {
+        const isPasswordValid = clienteRegistrado.isPasswordValid(password);
+
+        console.log(clienteRegistrado.password);
+        console.log(password)
+
+        if (!isPasswordValid) {
             throw err;
         }
 
-        const accessToken = createAccessToken(cliente.id);
+        const accessToken = createAccessToken(clienteRegistrado.id);
 
         res.json(accessToken);
     } catch (error) {

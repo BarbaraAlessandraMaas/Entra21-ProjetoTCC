@@ -2,8 +2,6 @@ const { Cliente } = require("../db/models");
 const createHttpError = require("http-errors");
 const clientesServices = require("../services/clientesServices");
 
-
-
 async function createCliente(req, res, next) {
     const { name, cpf, password, phone, email } = req.body;
     try {                
@@ -23,22 +21,32 @@ async function createCliente(req, res, next) {
     }
 };
 
-async function getCliente(req, res, next) {
-    const clienteId = res.locals.clienteId;
-
+async function getClientes(req, res, next) {
     try {
-        const cliente = await Cliente.findOne({ where: { id: clienteId }});
+        const clientes= await clientesServices.getClientes();
 
-        if (!cliente) {
-            throw new createHttpError(404, "Usuário não encontrado");
-        }
-
-        res.json(cliente);
+        res.json(clientes);
     } catch (error) {
-        console.log(error);
         next(error);
     }
-};
+}
+
+// async function getCliente(req, res, next) {
+//     const clienteId = res.locals.clienteId;
+
+//     try {
+//         const cliente = await Cliente.findOne({ where: { id: clienteId }});
+
+//         if (!cliente) {
+//             throw new createHttpError(404, "Usuário não encontrado");
+//         }
+
+//         res.json(cliente);
+//     } catch (error) {
+//         console.log(error);
+//         next(error);
+//     }
+// };
 
 async function updateCliente(req, res, next) {
     const { name, password, email, phone } = req.body;
@@ -53,6 +61,6 @@ async function updateCliente(req, res, next) {
 
 module.exports = {
     createCliente,
-    getCliente,
+    getClientes,
     updateCliente
 }

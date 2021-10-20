@@ -20,9 +20,13 @@ export const initialState = {
     isPasswordValid: false,
     confirmPassword: "",
     isConfirmPasswordValid: false,
+    logradouro: "",
+    bairro: "",
+    municipio: "",
+    complemento: "",
     isRegisterValid: false,
     isLoading: false
-}
+};
 
 export function TelaRegistro({ navigation }) {
     const [state, setState] = useState(initialState);
@@ -43,7 +47,7 @@ export function TelaRegistro({ navigation }) {
     }, [state.isNameValid, state.isCpfValid, state.isPhoneNumberValid]);
 
     function handleNameChange(text) {
-        if (text.trim().length >= 4) {
+        if (text.trim().length >= 2) {
             setState(prevState => ({
                 ...prevState,
                 name: text,

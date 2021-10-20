@@ -1,70 +1,72 @@
-import React, { useState } from "react";
-import { StyleSheet, TextInput, View, TouchableOpacity, Text, Modal, ScrollView, FlatList} from "react-native";
+import React, { useState, useEffect } from "react";
+import { StyleSheet, TextInput, View, TouchableOpacity, Text, Modal, ScrollView, FlatList } from "react-native";
 import { ArrowBack } from "../components/ArrowBack";
 import { Ionicons } from "@expo/vector-icons";
+import { initialState } from "./TelaRegistro";
 
 export function TelaEndereco({ navigation }) {
-    const [logradouro, setLogradouro] = React.useState("");
-    const [bairro, setBairro] = React.useState("");
-    const [complemento, setComplemento] = React.useState("");
     const [modalOpen, setModalOpen] = useState(false);
     const [selectedId, setSelectedId] = useState(null);
+    const [state, setState] = useState(initialState);
+
     const municipios = [
-        {
-          id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-          title: 'Timbó',
-        },
-        {
-          id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-          title: 'Blumenal',
-        },
-        {
-          id: '58694a0f-3da1-471f-bd96-145571e29d72',
-          title: 'Indaial',
-        },
-        {
-            id: '3ac68a8973498575-48d3-a4f8-fbd91aa97f63',
-            title: 'Pomerode',
-        },
-        {
-            id: '3ac68afc-c600984098098udlkf43l7f63',
-            title: 'Rodeio',
-        },
-        {
-            id: 'sdfjskldfhop´lç~´opprip-fbd91aa97f63',
-            title: 'Florianópolis',
-        },
-        {
-            id: '3ac68afc-c6sifalhfuishfuahfeweiopwk',
-            title: 'Joinville',
-        },
-        {
-            id: '3ac68afc-c6sifasfsdfdsishfuahfeweiopwk',
-            title: 'Penha',
-        },
-        {
-            id: '3ac68afc-c6sweiopwk',
-            title: 'Curitibanos',
-        },
-      ];
-      const Item = ({ item, onPress, backgroundColor, textColor }) => (
+        { id: 1, title: "Timbó" },
+        { id: 2, title: "Blumenau" },
+        { id: 3, title: "Indaial" },
+        { id: 4, title: "Pomerode" },
+        { id: 5, title: "Rodeio" },
+        { id: 6, title: "Florianópolis" },
+        { id: 7, title: "Joinville" },
+        { id: 8, title: "Penha" },
+        { id: 9, title: "Navegantes" }
+    ];
+
+    function handleLogradouroChange(text) {
+        setState(prevState => ({
+            ...prevState,
+            logradouro: text
+        }));
+    }
+
+    function handleBairroChange(text) {
+        setState(prevState => ({
+            ...prevState,
+            bairro: text
+        }));
+    }
+
+    function handleComplementoChange(text) {
+        setState(prevState => ({
+            ...prevState,
+            complemento: text
+        }));
+    }
+
+    const Item = ({ item, onPress, backgroundColor, textColor }) => (
         <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
-          <Text style={[styles.title, textColor]}>{item.title}</Text>
+            <Text style={[styles.title, textColor]}>{item.title}</Text>
         </TouchableOpacity>
-      );
-      const renderItem = ({ item }) => {
-        const backgroundColor = item.id === selectedId ? '#36B8B8' : "#EAEAEA";
-        const color = item.id === selectedId ? 'white' : 'black';
-    
+    );
+
+    const renderItem = ({ item }) => {
+        const backgroundColor = item.id === selectedId ? "#36B8B8" : "#EAEAEA";
+        const color = item.id === selectedId ? "white" : "black";
+
         return (
-          <Item
-            item={item}
-            onPress={() => setSelectedId(item.id)}
-            backgroundColor={{ backgroundColor }}
-            textColor={{ color }}
-          />
+            <Item
+                item={item}
+                onPress={() => setSelectedId(item.id)}
+                backgroundColor={{ backgroundColor }}
+                textColor={{ color }}
+                value={state.municipio}
+            />
         );
-      };
+    };
+
+    const handleCidadeChange = () => {
+        initialState.municipio = municipios[selectedId - 1].title
+        setModalOpen(false);
+    }
 
     return (
         <View style={styles.container}>
@@ -73,14 +75,14 @@ export function TelaEndereco({ navigation }) {
 
                 <ScrollView style={styles.form}>
                     <TextInput
-                        onChangeText={setLogradouro}
-                        value={logradouro}
+                        onChangeText={text => handleLogradouroChange(text)}
+                        value={state.logradouro}
                         placeholder="LOGRADOURO"
                         style={styles.input}
                     />
                     <TextInput
-                        onChangeText={setBairro}
-                        value={bairro}
+                        onChangeText={text => handleBairroChange(text)}
+                        value={state.bairro}
                         placeholder="BAIRRO"
                         style={styles.input}
                     />
@@ -91,15 +93,15 @@ export function TelaEndereco({ navigation }) {
                     </TouchableOpacity>
 
                     <TextInput
-                        onChangeText={setComplemento}
-                        value={complemento}
+                        onChangeText={text => handleComplementoChange(text)}
+                        value={state.complemento}
                         placeholder="COMPLEMENTO"
                         style={styles.input}
                     />
                 </ScrollView>
 
                 <View style={{ marginBottom: 50 }}>
-                    <TouchableOpacity style={styles.buttonConfirm}>
+                    <TouchableOpacity style={styles.buttonConfirm} onPress={() => navigation.navigate("TelaRegistro")}>
                         <Text style={styles.textButtonConfirm}>Confirmar</Text>
                     </TouchableOpacity>
                 </View>
@@ -125,7 +127,7 @@ export function TelaEndereco({ navigation }) {
                         />
                     </View>
                     <TouchableOpacity style={styles.buttonConfirm}>
-                        <Text style={styles.textButtonInput} onPress={() => navigation.navigate("Início")}>Confirmar</Text>
+                        <Text style={styles.textButtonConfirm} onPress={handleCidadeChange}>Confirmar</Text>
                     </TouchableOpacity>
                 </View>
             </Modal>
@@ -222,14 +224,14 @@ const styles = StyleSheet.create({
         marginTop: 50
     },
     item: {
-        alignItems:"center",
+        alignItems: "center",
         marginVertical: 1,
         marginHorizontal: 3,
         height: 50,
         padding: 8
     },
     title: {
-        fontSize: 26,
+        fontSize: 20,
     },
     buttonModalText: {
         color: "black"

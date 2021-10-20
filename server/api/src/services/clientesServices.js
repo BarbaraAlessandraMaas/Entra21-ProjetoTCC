@@ -7,10 +7,10 @@ async function getClientes() {
     return clientes;
 }
 
-async function createCliente({ name, email, password }) {
+async function createCliente({ name, cpf, password, phone, email }) {
     const [cliente, created] = await Cliente.findOrCreate({
         where: { email },
-        defaults: { name, password }
+        defaults: {name, cpf, password, phone }
     });
 
     if (!created) {
