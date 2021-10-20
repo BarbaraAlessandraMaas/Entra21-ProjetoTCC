@@ -4,7 +4,7 @@ import { ArrowBack } from "../components/ArrowBack";
 import { HelpSolution } from "../components/HelpSolution";
 import { Ionicons } from "@expo/vector-icons";
 
-export function TelaTopico({ navigation }) {
+export function TelaTopico1(props) {
     const [modalOpen, setModalOpen] = useState(false);
 
     return (
@@ -12,11 +12,13 @@ export function TelaTopico({ navigation }) {
             <ArrowBack text="TÓPICO" />
 
             <ScrollView style={styles.information}>
-                <Text style={styles.textInformation}>1.Verifique se o computador está conectado à internet;</Text>
-                <Text style={styles.textInformation}>2.Verifique se seu modem está ligado e funcionante;</Text>
-                <Text style={styles.textInformation}>3.Entre nas opções de rede localizada na barra de ferramentas do seu computador;</Text>
-                <Text style={styles.textInformation}>4.Selecione "Configuração de Rede e Internet";</Text>
-                <Text style={styles.textInformation}>5.As informações estarão na seção "Status da rede".</Text>
+                <Text style={styles.textInformation}>1.Desligue o modem e ligue novamente;</Text>
+                <Text style={styles.textInformation}>
+                    2.Com o modem ligado, analise o painel frontal e perceba qualquer sinal estranho
+                    em sua série de luzes.Se o seu modem DSL pára de funcionar, essas luzes podem
+                    parar de piscar, virar uma cor avermelhada ou desligar completamente;
+                </Text>
+                <Text style={styles.textInformation}>3.Consulte o manual do modem sobre a combinação de luzes que significam o erro.</Text>
             </ScrollView>
 
             <View style={styles.contact}>
@@ -45,7 +47,7 @@ export function TelaTopico({ navigation }) {
                     <View style={styles.content}>
                         <Text style={styles.textContent}>Como você deseja prosseguir?</Text>
 
-                        <TouchableOpacity style={styles.buttonContent} onPress={() => navigation.navigate("TelaChat")}>
+                        <TouchableOpacity style={styles.buttonContent}>
                             <Ionicons name="chatbubble" size={24} color="white" />
                             <Text style={styles.textButtonContent}>Converse conosco</Text>
                         </TouchableOpacity>

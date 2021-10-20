@@ -3,13 +3,14 @@ import { Text, View, StyleSheet, TouchableOpacity, StatusBar } from "react-nativ
 import { Ionicons } from "@expo/vector-icons";
 
 export function OptionBar(props) {
+    console.log(props)
     if (!props.dados) {
         return (
             <View style={styles.container}>
                 <StatusBar barStyle="white" backgroundColor="#183557" />
 
                 <View style={styles.status}>
-                    <TouchableOpacity style={styles.menuButton}>
+                    <TouchableOpacity style={styles.menuButton} onPress={() => props.navigation.navigate("TelaOpcoes")}>
                         <Ionicons name="menu" size={27} color="white" />
                     </TouchableOpacity>
 
@@ -25,7 +26,7 @@ export function OptionBar(props) {
                 <StatusBar barStyle="white" backgroundColor="#183557" />
 
                 <View style={styles.status}>
-                    <TouchableOpacity style={styles.menuButton}>
+                    <TouchableOpacity style={styles.menuButton} onPress={() => props.navigation.navigate("TelaOpcoes")}>
                         <Ionicons name="menu" size={27} color="white" />
                     </TouchableOpacity>
 

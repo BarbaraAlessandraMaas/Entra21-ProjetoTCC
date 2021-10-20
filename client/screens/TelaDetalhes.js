@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-export function TelaDetalhes() {
+export function TelaDetalhes({ navigation }) {
     const plano = [
         {
             cd_plano: 1,
@@ -52,24 +52,6 @@ export function TelaDetalhes() {
             cd_pagamento: 4,
             ds_status: "Pago",
             dt_vencimento: "Junho 2021",
-            vl_pagamento: plano[0].vl_plano
-        },
-        {
-            cd_pagamento: 5,
-            ds_status: "Pago",
-            dt_vencimento: "Maio 2021",
-            vl_pagamento: plano[0].vl_plano
-        },
-        {
-            cd_pagamento: 5,
-            ds_status: "Pago",
-            dt_vencimento: "Maio 2021",
-            vl_pagamento: plano[0].vl_plano
-        },
-        {
-            cd_pagamento: 5,
-            ds_status: "Pago",
-            dt_vencimento: "Maio 2021",
             vl_pagamento: plano[0].vl_plano
         },
         {

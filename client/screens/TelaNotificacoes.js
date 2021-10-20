@@ -16,7 +16,7 @@ const DadosNotificacoes = [
 export function TelaNotificacoes({ navigation }) {
     return (
         <View>
-            <ConfigBar nome="Notificações" />
+            <ConfigBar nome="Notificações" navigation={navigation} />
 
             <View style={styles.scroll}>
                 <FlatList

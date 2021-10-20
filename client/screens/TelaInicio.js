@@ -6,8 +6,8 @@ import { plano } from "../components/OnePlan";
 
 export const user = {
     cd_cliente: 1,
-    ds_nome: "Fulano",
-    ds_email: "fulano@gmail.com",
+    ds_nome: "Teste",
+    ds_email: "teste@email.com",
     ds_telefone: "(47) 98888-8888",
     nr_cpf: "111.111.111-11"
 }
@@ -29,7 +29,7 @@ const mostrarPlanos = ({ item }) => {
 export function TelaInicio({ navigation }) {
     return (
         <View style={styles.container}>
-            <OptionBar nome="Bem vindo," dados={user.ds_nome} />
+            <OptionBar nome="Bem vindo," dados={user.ds_nome} navigation={navigation} />
 
             <View style={styles.content}>
                 <View style={styles.containerDestaques}>
@@ -44,7 +44,7 @@ export function TelaInicio({ navigation }) {
                 </View>
 
                 <View style={styles.containerAllPlans}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate("TelaPlanos")}>
                         <Text style={styles.textButton}>Veja todo os planos{"\n"}disponíveis aqui</Text>
                     </TouchableOpacity>
                 </View>

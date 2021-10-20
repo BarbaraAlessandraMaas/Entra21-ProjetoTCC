@@ -61,28 +61,10 @@ const pagamento = [
         ds_status: "Pago",
         dt_vencimento: "Maio 2021",
         vl_pagamento: plano[0].vl_plano
-    },
-    {
-        cd_pagamento: 5,
-        ds_status: "Pago",
-        dt_vencimento: "Maio 2021",
-        vl_pagamento: plano[0].vl_plano
-    },
-    {
-        cd_pagamento: 5,
-        ds_status: "Pago",
-        dt_vencimento: "Maio 2021",
-        vl_pagamento: plano[0].vl_plano
-    },
-    {
-        cd_pagamento: 5,
-        ds_status: "Pago",
-        dt_vencimento: "Maio 2021",
-        vl_pagamento: plano[0].vl_plano
     }
 ]
 
-export function OnePlan() {
+export function OnePlan({ navigation }) {
     const mostrarPlano = ({ item }) => {
         const StatusColor = () => {
             if (item.ds_status === "Pago") {
@@ -106,7 +88,7 @@ export function OnePlan() {
                     <StatusColor />
                 </View>
 
-                <TouchableOpacity style={styles.buttonDetails}>
+                <TouchableOpacity style={styles.buttonDetails} onPress={() => navigation.navigate("TelaDetalhes")}>
                     <Text style={{ color: "#333333" }}>Detalhes</Text>
                     <Ionicons name="chevron-forward" size={24} color="#333333" />
                 </TouchableOpacity>

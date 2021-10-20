@@ -9,7 +9,7 @@ export function MeusPlanos({ navigation }) {
     if (numeroPlanos === 0) {
         return (
             <View style={styles.container}>
-                <OptionBar nome="Meus Planos" />
+                <OptionBar nome="Meus Planos" navigation={navigation} />
 
                 <View style={styles.plans}>
                     <Text style={styles.textNoPlans}>Você ainda não possui planos!</Text>
@@ -18,7 +18,7 @@ export function MeusPlanos({ navigation }) {
             </View>
         )
     } else if (numeroPlanos === 1) {
-        return <OnePlan />;
+        return <OnePlan navigation={navigation} />;
     }
 }
 

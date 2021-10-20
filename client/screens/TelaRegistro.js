@@ -29,6 +29,7 @@ export const initialState = {
 };
 
 export function TelaRegistro({ navigation }) {
+    console.log(navigation)
     const [state, setState] = useState(initialState);
 
     useEffect(() => {
@@ -120,7 +121,7 @@ export function TelaRegistro({ navigation }) {
                 </ScrollView>
 
                 <View style={{ marginBottom: 50 }}>
-                    <TouchableOpacity style={styles.buttonNext} onPress={() => navigation.navigate("TelaConfirmarRegistro")} disabled={!state.isRegisterNextStep}>
+                    <TouchableOpacity style={styles.buttonNext} onPress={() => navigation.navigate("TelaConfirmarRegistro")}>
                         <Text style={styles.textButtonNext}>Próximo</Text>
                     </TouchableOpacity>
                 </View>

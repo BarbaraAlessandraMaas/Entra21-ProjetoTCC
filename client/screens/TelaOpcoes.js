@@ -3,46 +3,29 @@ import { Modal, StyleSheet, View, Text, TouchableOpacity, DrawerLayoutAndroid, S
 import { Ionicons } from '@expo/vector-icons';
 import { OptionDrawer } from "../components/OptionDrawer";
 
-export function TelaOpcoes() {
+export function TelaOpcoes({ navigation }) {
     const [modalOpen, setModalOpen] = useState(false);
-    const drawer = useRef(null);
-
-    const navigationView = () => (
-        <View style={styles.inDrawer}>
-            <TouchableOpacity style={styles.buttonClose} onPress={() => drawer.current.closeDrawer()}>
-                <Ionicons name="close" size={30} color="black" />
-            </TouchableOpacity>
-
-            <TouchableOpacity>
-                <OptionDrawer icon="help" text="Ajuda" />
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => setModalOpen(true)}>
-                <OptionDrawer icon="document-text-outline" text="Sobre" />
-            </TouchableOpacity>
-            
-            <TouchableOpacity>
-                <OptionDrawer icon="log-out-outline" text="Log Out" />
-            </TouchableOpacity>
-        </View>
-    );
+    console.log(navigation)
 
     return (
         <View style={styles.container}>
-            <DrawerLayoutAndroid
-                ref={drawer}
-                drawerWidth={300}
-                drawerPosition={"left"}
-                renderNavigationView={navigationView}
-            >
-                <View style={styles.outDrawer}>
-                    <StatusBar barStyle="dark-content" backgroundColor="white" />
+            <View style={styles.inDrawer}>
+                    <TouchableOpacity style={styles.buttonClose} onPress={() => navigation.goBack()}>
+                        <Ionicons name="close" size={30} color="black" />
+                    </TouchableOpacity>
 
-                    <TouchableOpacity onPress={() => drawer.current.openDrawer()}>
-                        <Ionicons name="menu" size={30} color="black" />
+                    <TouchableOpacity onPress={() => navigation.navigate("TelaAjuda")}>
+                        <OptionDrawer icon="help" text="Ajuda" />
+                    </TouchableOpacity>
+
+                    <TouchableOpacity onPress={() => setModalOpen(true)}>
+                        <OptionDrawer icon="document-text-outline" text="Sobre" onPress={() => setModalOpen(true)} />
+                    </TouchableOpacity>
+
+                    <TouchableOpacity onPress={() => navigation.navigate("TelaLogin")}>
+                        <OptionDrawer icon="log-out-outline" text="Log Out" />
                     </TouchableOpacity>
                 </View>
-            </DrawerLayoutAndroid>
 
             <Modal visible={modalOpen} animationType="slide">
                 <View style={styles.modalSobre}>

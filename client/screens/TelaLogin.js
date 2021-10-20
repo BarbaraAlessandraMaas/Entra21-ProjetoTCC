@@ -6,7 +6,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { TelaLoading } from "../components/TelaLoading";
 import { showErrorMessage } from "../utils/errorHandlers";
 import { handleCpfChange, handlePasswordChange } from "../utils/commonValidations";
-// import MaskInput, { Masks } from "react-native-mask-input";
+import MaskInput, { Masks } from "react-native-mask-input";
 
 const initialState = {
     cpf: "",
@@ -29,9 +29,6 @@ export function TelaLogin({ navigation }) {
             isLoginValid: prevState.isCpfValid && prevState.isPasswordValid
         }));
     }, [state.isCpfValid, state.isPasswordValid]);
-
-    console.log(state.isCpfValid);
-    console.log(state.isPasswordValid);
 
     async function handleSignIn() {
         if (!state.cpf.trim() || !state.password.trim()) {
@@ -77,8 +74,8 @@ export function TelaLogin({ navigation }) {
                 </View>
 
                 <View style={styles.form}>
-                    <TextInput
-                        // mask={Masks.BRL_CPF}
+                    <MaskInput
+                        mask={Masks.BRL_CPF}
                         onChangeText={text => handleCpfChange(text, setState)}
                         isValid={true}
                         value={state.cpf}
@@ -99,7 +96,7 @@ export function TelaLogin({ navigation }) {
                         onPress={() => setSelecionado(prevSelecionado => !prevSelecionado)}
                         message="Mantenha-se conectado"
                     />
-                    <TouchableOpacity style={styles.buttonEntrar} onPress={navigation.navigate("TabNavigation")}>
+                    <TouchableOpacity style={styles.buttonEntrar} onPress={() => navigation.navigate("TabNavigation")}>
                         <Text style={styles.textEntrar}>ENTRAR</Text>
                     </TouchableOpacity>
                 </View>

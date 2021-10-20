@@ -5,46 +5,9 @@ import { showErrorMessage } from "../utils/errorHandlers";
 import { initialState } from "./TelaRegistro";
 
 export function TelaConfirmarRegistro({ navigation }) {
-    const { memoContext } = useAuth();
     const [modalOpen, setModalOpen] = useState(false);
     const [state, setState] = useState(initialState);
 
-    async function handleSignUp() {
-        setState(prevState => ({ ...prevState, isLoading: true }));
-
-        useEffect(() => {
-            const validations = [
-                state.isEmailValid,
-                state.isPasswordValid,
-                state.isConfirmPasswordValid
-            ];
-
-            const isRegisterValid = validations.reduce((previousValue, currentValue) => previousValue && currentValue);
-
-            setState(prevState => ({
-                ...prevState,
-                isRegisterValid: isRegisterValid
-            }));
-        }, [ state.isEmailValid, state.isPasswordValid, state.isConfirmPasswordValid]);
-
-        try {
-            const cliente = {
-                phoneNumber: initialState.phoneNumber,
-                email: initialState.email,
-                password: initialState.password
-            }
-
-            await memoContext.signUp(cliente);
-            setModalOpen(true);
-            navigation.navigate("TelaLogin");
-        } catch (err) {
-            setState(prevState => ({
-                ...prevState,
-                isLoading: false,
-            }));
-            showErrorMessage(err);
-        }
-    };
 
     return (
         <View style={styles.container}>
@@ -80,11 +43,11 @@ export function TelaConfirmarRegistro({ navigation }) {
             </View>
 
             <View style={styles.buttonsView}>
-                <TouchableOpacity style={[styles.button, { backgroundColor: "#98D4D4" }]} onPress={navigation.goBack()}>
+                <TouchableOpacity style={[styles.button, { backgroundColor: "#98D4D4" }]} onPress={() => navigation.goBack()}>
                     <Text style={styles.textButton}>Voltar</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.button} onPress={handleSignUp} disabled={!state.isRegisterValid}>
+                <TouchableOpacity style={styles.button} onPress={() => setModalOpen(true)}>
                     <Text style={styles.textButton}>Cadastrar-se</Text>
                 </TouchableOpacity>
             </View>
@@ -101,7 +64,7 @@ export function TelaConfirmarRegistro({ navigation }) {
                     <View style={styles.buttonView}>
                         <TouchableOpacity
                             style={[styles.button, { backgroundColor: "#EAEAEA" }]}
-                            onPress={() => setModalOpen(false)}
+                            onPress={() => navigation.navigate("TelaLogin")}
                         >
                             <Text style={[styles.textButton, { color: "#333333" }]}>Continuar</Text>
                         </TouchableOpacity>

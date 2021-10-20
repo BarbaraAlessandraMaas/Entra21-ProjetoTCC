@@ -3,7 +3,7 @@ import { View, ScrollView, StyleSheet, Text, TouchableOpacity } from "react-nati
 import { ArrowBack } from "../components/ArrowBack";
 import { HelpTopic } from "../components/HelpTopic";
 
-export function TelaAjuda() {
+export function TelaAjuda({ navigation }) {
     return (
         <View style={styles.container}>
             <ArrowBack text="AJUDA" />
@@ -12,16 +12,12 @@ export function TelaAjuda() {
                 <Text style={styles.helpText}>Explore alguns de nossos tópicos para obter ajuda</Text>
                 
                 <ScrollView>
-                    <TouchableOpacity><HelpTopic text="aaaaaaaaaaaaaaaaaa" /></TouchableOpacity>
-                    <TouchableOpacity><HelpTopic text="aaaaaaaaaaaaaaaaaa" /></TouchableOpacity>
-                    <TouchableOpacity><HelpTopic text="aaaaaaaaaaaaaaaaaa" /></TouchableOpacity>
-                    <TouchableOpacity><HelpTopic text="aaaaaaaaaaaaaaaaaa" /></TouchableOpacity>
-                    <TouchableOpacity><HelpTopic text="aaaaaaaaaaaaaaaaaa" /></TouchableOpacity>
-                    <TouchableOpacity><HelpTopic text="aaaaaaaaaaaaaaaaaa" /></TouchableOpacity>
-                    <TouchableOpacity><HelpTopic text="aaaaaaaaaaaaaaaaaa" /></TouchableOpacity>
-                    <TouchableOpacity><HelpTopic text="aaaaaaaaaaaaaaaaaa" /></TouchableOpacity>
-                    <TouchableOpacity><HelpTopic text="aaaaaaaaaaaaaaaaaa" /></TouchableOpacity>
-                    <TouchableOpacity><HelpTopic text="aaaaaaaaaaaaaaaaaa" /></TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate("TelaTopico")}><HelpTopic text="Verificar se há má conexão pelo computador" /></TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate("TelaTopico1")}><HelpTopic text="Problemas com o modem DSL" /></TouchableOpacity>
+                    <TouchableOpacity><HelpTopic text="Como saber se é o site que está fora do ar" /></TouchableOpacity>
+                    <TouchableOpacity><HelpTopic text="Problemas rede com fios" /></TouchableOpacity>
+                    <TouchableOpacity><HelpTopic text="Um dispositivo não está se conectando" /></TouchableOpacity>
+                    <TouchableOpacity><HelpTopic text="Alternativa final" /></TouchableOpacity>
                 </ScrollView>
             </View>
         </View>

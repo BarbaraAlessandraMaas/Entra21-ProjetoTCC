@@ -10,7 +10,7 @@ export function MinhaConta({ navigation }) {
 
     return (
         <View style={styles.container}>
-            <OptionBar nome={user.ds_nome} dados={user.ds_email} />
+            <OptionBar nome={user.ds_nome} dados={user.ds_email} navigation={navigation} />
 
             <View style={styles.content}>
                 <View style={styles.containerIcon}>

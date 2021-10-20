@@ -7,25 +7,25 @@ import { Ionicons } from "@expo/vector-icons";
 export function TelaChat() {
     const data = new Date();
     const dataFormatada = `${data.getHours()}:${data.getMinutes()}`;
-    const currentClient = { cd_cliente: 1 };
+    const currentClient = { cd_cliente: 0 };
 
     const CONTENT = [
         {
             cd_funcionario: 1,
             cd_cliente: 1,
-            ds_mensagem: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            ds_mensagem: "Olá, seja bem vindo(a) ao chat de assistência!",
             dt_mensagem: dataFormatada
         },
         {
             cd_funcionario: 1,
             cd_cliente: 1,
-            ds_mensagem: "Sim",
+            ds_mensagem: "Aqui você pode sanar as suas dúvidas de maneira mais específica.",
             dt_mensagem: dataFormatada
         },
         {
             cd_funcionario: 1,
             cd_cliente: 1,
-            ds_mensagem: "Mensagem 3",
+            ds_mensagem: "Em que podemos ajudar?",
             dt_mensagem: dataFormatada
         }
     ]

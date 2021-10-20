@@ -11,7 +11,7 @@ export function ConfigBar(props) {
             <StatusBar barStyle="white" backgroundColor="#183557" />
 
             <View style={styles.status}>
-                <TouchableOpacity style={styles.menuButton}>
+                <TouchableOpacity style={styles.menuButton} onPress={() => props.navigation.navigate("TelaOpcoes")}>
                     <Ionicons name="menu" size={27} color="white" />
                 </TouchableOpacity>
 
