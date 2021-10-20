@@ -6,6 +6,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { TelaLoading } from "../components/TelaLoading";
 import { showErrorMessage } from "../utils/errorHandlers";
 import { handleCpfChange, handlePasswordChange } from "../utils/commonValidations";
+import MaskInput, { Masks } from "react-native-mask-input";
 
 const initialState = {
     cpf: "",
@@ -62,13 +63,14 @@ export function TelaLogin({ navigation }) {
                 </View>
 
                 <View style={styles.form}>
-                    <TextInput
-                        placeholder="CPF"
+                    <MaskInput
+                        mask={Masks.BRL_CPF}
                         onChangeText={text => handleCpfChange(text, setState)}
-                        style={styles.input}
-                        value={state.cpf}
-                        keyboardType="numeric"
                         isValid={state.isCpfValid}
+                        value={state.cpf}
+                        placeholder="CPF"
+                        style={styles.input}
+                        keyboardType="numeric"
                     />
                     <TextInput
                         placeholder="SENHA"

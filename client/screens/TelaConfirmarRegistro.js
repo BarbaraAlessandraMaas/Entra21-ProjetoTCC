@@ -48,7 +48,7 @@ export function TelaConfirmarRegistro({ navigation }) {
             }));
             showErrorMessage(err);
         }
-    }
+    };
 
     return (
         <View style={styles.container}>
