@@ -10,7 +10,7 @@ const initialState = {
 }
 
 function reducer(prevState, action) {
-    switch(action.type) {
+    switch (action.type) {
         case "RESTORE_TOKEN":
             return {
                 ...prevState,
@@ -43,11 +43,11 @@ export function AuthProvider({ children }) {
                 accessToken = await SecureStore.getItemAsync("access-token");
 
                 api.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
-            } catch (err) { 
+            } catch (err) {
                 console.log(err);
             }
 
-            dispatch({ type: "RESTORE_TOKEN", token: accessToken });            
+            dispatch({ type: "RESTORE_TOKEN", token: accessToken });
         }
 
         restoreToken();
@@ -55,25 +55,25 @@ export function AuthProvider({ children }) {
 
     const memoContext = React.useMemo(() => ({
         signIn: async (cpf, password) => {
-            try {                                                
-                const accessToken = (await api.post("/auth/login", { cpf, password })).data;                
+            try {
+                const accessToken = (await api.post("/auth/login", { cpf, password })).data;
 
                 await SecureStore.setItemAsync("access-token", accessToken);
-                
+
                 api.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
 
                 dispatch({ type: "SIGN_IN", token: accessToken });
             } catch (err) {
                 console.log(err);
-                throw err;                           
-            }            
+                throw err;
+            }
         },
         signUp: async (cliente) => {
-            try {                                                        
-                await api.post("/clientes", { ...cliente });                                                                                
+            try {
+                await api.post("/clientes", { ...cliente });
             } catch (err) {
                 console.log(err);
-                throw err;                           
+                throw err;
             }
         },
         signOut: () => {
@@ -88,8 +88,8 @@ export function AuthProvider({ children }) {
     }), []);
 
     return (
-        <AuthContext.Provider value={{ state, memoContext}}>
-            { children }
+        <AuthContext.Provider value={{ state, memoContext }}>
+            {children}
         </AuthContext.Provider>
     );
-}
+};

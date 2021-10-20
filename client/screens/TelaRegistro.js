@@ -1,21 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, TextInput, View, TouchableOpacity, Text, ScrollView } from "react-native"
 import { ArrowBack } from "../components/ArrowBack";
 import { Ionicons } from "@expo/vector-icons";
 import { handleCpfChange } from "../utils/commonValidations";
 import { TelaLoading } from "../components/TelaLoading";
+import MaskInput, { Masks } from "react-native-mask-input";
 
 export const initialState = {
     name: "",
     isNameValid: false,
     cpf: "",
     isCpfValid: false,
-    phoneNumber: "",    
+    phoneNumber: "",
     isPhoneNumberValid: false,
     isRegisterNextStep: false,
     email: "",
     isEmailValid: false,
-    password: "",    
+    password: "",
     isPasswordValid: false,
     confirmPassword: "",
     isConfirmPasswordValid: false,
@@ -26,8 +27,8 @@ export const initialState = {
 export function TelaRegistro({ navigation }) {
     const [state, setState] = useState(initialState);
 
-    useEffect(() => {        
-        const validations = [ 
+    useEffect(() => {
+        const validations = [
             state.isNameValid,
             state.isCpfValid,
             state.isPhoneNumberValid
@@ -36,7 +37,7 @@ export function TelaRegistro({ navigation }) {
         const isRegisterNextStep = validations.reduce((previousValue, currentValue) => previousValue && currentValue);
 
         setState(prevState => ({
-            ...prevState, 
+            ...prevState,
             isRegisterNextStep: isRegisterNextStep
         }));
     }, [state.isNameValid, state.isCpfValid, state.isPhoneNumberValid]);
@@ -44,15 +45,15 @@ export function TelaRegistro({ navigation }) {
     function handleNameChange(text) {
         if (text.trim().length >= 4) {
             setState(prevState => ({
-                ...prevState, 
-                name: text, 
-                isNameValid: true 
+                ...prevState,
+                name: text,
+                isNameValid: true
             }));
         } else {
             setState(prevState => ({
-                ...prevState, 
-                name: text, 
-                isNameValid: false 
+                ...prevState,
+                name: text,
+                isNameValid: false
             }));
         }
     }
@@ -60,14 +61,14 @@ export function TelaRegistro({ navigation }) {
     function handlePhoneNumberChange(text) {
         if (text.trim() <= 11) {
             setState(prevState => ({
-                ...prevState, 
-                phoneNumber: text, 
-                isPhoneNumberValid: true 
+                ...prevState,
+                phoneNumber: text,
+                isPhoneNumberValid: true
             }));
         } else {
             setState(prevState => ({
-                ...prevState, 
-                phoneNumber: text, 
+                ...prevState,
+                phoneNumber: text,
                 isPhoneNumberValid: false
             }));
         }
@@ -83,24 +84,26 @@ export function TelaRegistro({ navigation }) {
                     <TextInput
                         onChangeText={text => handleNameChange(text)}
                         isValid={state.isNameValid}
-                        value={nome}
+                        value={state.name}
                         placeholder="NOME"
                         style={styles.inputTop}
                     />
 
-                    <TextInput
+                    <MaskInput
+                        mask={Masks.BRL_CPF}
                         onChangeText={text => handleCpfChange(text, setState)}
                         isValid={state.isCpfValid}
-                        value={cpf}
+                        value={state.cpf}
                         placeholder="CPF"
                         style={styles.input}
                         keyboardType="numeric"
                     />
 
-                    <TextInput
+                    <MaskInput
+                        mask={Masks.BRL_PHONE}
                         onChangeText={text => handlePhoneNumberChange(text)}
                         isValid={state.isPhoneNumberValid}
-                        value={celular}
+                        value={state.phoneNumber}
                         placeholder="CELULAR"
                         style={styles.input}
                         keyboardType="phone-pad"

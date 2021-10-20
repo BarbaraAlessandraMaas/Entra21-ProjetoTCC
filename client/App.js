@@ -11,17 +11,20 @@ import { TelaAjuda } from "./screens/TelaAjuda";
 import { TelaOpcoes } from "./screens/TelaOpcoes";
 import { TelaTopico } from "./screens/TelaTopico";
 import { TelaPlanos } from "./screens/TelaPlanos";
-import { TelaLogin } from './screens/TelaLogin';
+import { TelaLogin } from "./screens/TelaLogin";
 import { StackScreen } from "./routes/StackScreen";
 import { TelaLoading } from "./components/TelaLoading";
+import { AuthProvider } from "./contexts/AuthContext";
 
 export default function App() {
-  return (    
-    <StackScreen />
+  return (
+    <AuthProvider>
+      <StackScreen />
+    </AuthProvider>
     // <NavigationContainer>
     //   <TabNavigation />
     // </NavigationContainer>
-    
+
     // <TelaLoading />
     // <TelaDetalhes />
     // <TelaEndereco/>

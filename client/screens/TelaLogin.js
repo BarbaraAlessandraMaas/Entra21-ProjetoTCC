@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image, StatusBar } from "react-native";
 import { useFonts } from "expo-font";
 import { Checkbox } from "../components/Checkbox";
@@ -31,12 +31,12 @@ export function TelaLogin({ navigation }) {
     async function handleSignIn() {
         setState(prevState => ({ ...prevState, isLoading: true }));
         try {
-            await memoContext.signIn(state.email, state.password);
+            await memoContext.signIn(state.cpf, state.password);
         } catch (err) {
             setState(prevState => ({
                 ...prevState,
                 isLoading: false,
-                emailError: true,
+                cpfError: true,
                 passwordError: true
             }));
             showErrorMessage(err);
@@ -45,7 +45,7 @@ export function TelaLogin({ navigation }) {
 
     function handleNavigateSignUpScreen() {
         setState(initialState);
-        navigation.push("TelaCadastro");
+        navigation.push("TelaRegistro");
     }
 
     useFonts({ "Roboto": require("../assets/Roboto-Regular.ttf") });

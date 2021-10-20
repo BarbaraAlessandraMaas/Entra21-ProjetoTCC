@@ -14,8 +14,6 @@ export function TelaCidade() {
                     gostaria que tivessem planos.
                 </Text>
 
-                <TextInput style={styles.selectCity} placeholder="NOME DA CIDADE" />
-
                 <TouchableOpacity>
                     <Text style={styles.buttonConclude}>Concluir</Text>
                 </TouchableOpacity>
