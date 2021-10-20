@@ -11,7 +11,7 @@ const Tab = createMaterialBottomTabNavigator();
 export function TabNavigation() {
     return (
         <Tab.Navigator
-            initialRouteName="TelaInicio"
+            initialRouteName="Inicio"
             barStyle={{ backgroundColor: "#183557" }}
             activeColor="#EAEAEA"
             inactiveColor="white"

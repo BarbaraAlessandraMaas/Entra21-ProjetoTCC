@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, TextInput, View, TouchableOpacity, Text, Modal, ScrollView } from "react-native";
+import { StyleSheet, TextInput, View, TouchableOpacity, Text, Modal, ScrollView, FlatList} from "react-native";
 import { ArrowBack } from "../components/ArrowBack";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -8,6 +8,63 @@ export function TelaEndereco({ navigation }) {
     const [bairro, setBairro] = React.useState("");
     const [complemento, setComplemento] = React.useState("");
     const [modalOpen, setModalOpen] = useState(false);
+    const [selectedId, setSelectedId] = useState(null);
+    const municipios = [
+        {
+          id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+          title: 'Timbó',
+        },
+        {
+          id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
+          title: 'Blumenal',
+        },
+        {
+          id: '58694a0f-3da1-471f-bd96-145571e29d72',
+          title: 'Indaial',
+        },
+        {
+            id: '3ac68a8973498575-48d3-a4f8-fbd91aa97f63',
+            title: 'Pomerode',
+        },
+        {
+            id: '3ac68afc-c600984098098udlkf43l7f63',
+            title: 'Rodeio',
+        },
+        {
+            id: 'sdfjskldfhop´lç~´opprip-fbd91aa97f63',
+            title: 'Florianópolis',
+        },
+        {
+            id: '3ac68afc-c6sifalhfuishfuahfeweiopwk',
+            title: 'Joinville',
+        },
+        {
+            id: '3ac68afc-c6sifasfsdfdsishfuahfeweiopwk',
+            title: 'Penha',
+        },
+        {
+            id: '3ac68afc-c6sweiopwk',
+            title: 'Curitibanos',
+        },
+      ];
+      const Item = ({ item, onPress, backgroundColor, textColor }) => (
+        <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
+          <Text style={[styles.title, textColor]}>{item.title}</Text>
+        </TouchableOpacity>
+      );
+      const renderItem = ({ item }) => {
+        const backgroundColor = item.id === selectedId ? '#36B8B8' : "#EAEAEA";
+        const color = item.id === selectedId ? 'white' : 'black';
+    
+        return (
+          <Item
+            item={item}
+            onPress={() => setSelectedId(item.id)}
+            backgroundColor={{ backgroundColor }}
+            textColor={{ color }}
+          />
+        );
+      };
 
     return (
         <View style={styles.container}>
@@ -61,10 +118,14 @@ export function TelaEndereco({ navigation }) {
                 <View style={styles.background}>
                     <Text style={styles.textUp}>Selecione seu município de residência:</Text>
                     <View style={styles.modalContent}>
-
+                        <FlatList
+                            data={municipios}
+                            renderItem={renderItem}
+                            keyExtractor={item => item.id}
+                        />
                     </View>
-                    <TouchableOpacity>
-                        <Text style={styles.textDown} onPress={() => navigation.navigate("TelaCidade")}>Não encontrou sua cidade?</Text>
+                    <TouchableOpacity style={styles.buttonConfirm}>
+                        <Text style={styles.textButtonInput} onPress={() => navigation.navigate("Início")}>Confirmar</Text>
                     </TouchableOpacity>
                 </View>
             </Modal>
@@ -149,9 +210,9 @@ const styles = StyleSheet.create({
     },
     modalContent: {
         backgroundColor: "#183557",
-        borderRadius: 20,
-        height: 500,
-        marginHorizontal: 10
+        height: 474,
+        marginHorizontal: 10,
+        padding: 2
     },
     textDown: {
         textDecorationLine: "underline",
@@ -159,5 +220,18 @@ const styles = StyleSheet.create({
         color: "black",
         textAlign: "center",
         marginTop: 50
+    },
+    item: {
+        alignItems:"center",
+        marginVertical: 1,
+        marginHorizontal: 3,
+        height: 50,
+        padding: 8
+    },
+    title: {
+        fontSize: 26,
+    },
+    buttonModalText: {
+        color: "black"
     }
 });
